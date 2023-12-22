@@ -16,37 +16,20 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
-    [Header("UI")]
+
     public Text tryText;
     int tryPoint;
 
-    [Header("Card")]
+    public static GameManager I;
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
-
-    [Header("Time")]
     public Text timeText;
     float gameTime;
     float setTime;
     public int LimitTime;
     public int PenaltyTime;
-
-
-    public static GameManager I;
-   
-    
-
-
-
-    void Awake()
-    {
-        I = this;
-    }
-
-
-
     private void Update()
     {
         gameTime += Time.deltaTime;
@@ -60,14 +43,12 @@ public class GameManager : MonoBehaviour
             setTime += Time.deltaTime;
             if(setTime >= 5)
             {
-                //Ä«ï¿½ï¿½ ï¿½Ý´ï¿½ ï¿½Ô¼ï¿½ ï¿½Ö±ï¿½
+                //Ä«µå ´Ý´Â ÇÔ¼ö ³Ö±â
                 firstCard = null;
                 setTime = 0;
             }
         }
     }
-
-
     void Shuffle()
     {
         for (int i = 0; i < boardSize * boardSize; i++)
@@ -85,22 +66,21 @@ public class GameManager : MonoBehaviour
 
         queue = new Queue<int>(prefebIdxs);
     }
-
     public void Match()
     {
         tryPoint++;
 
-        //ï¿½Î¹ï¿½Â° Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+        //µÎ¹øÂ° Ä«µå ´©¸£¸é ÃÊ±âÈ­
         setTime = 0;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
             Destroy(secondCard);
 
-            //ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
+            //¼Ò°³ º¸¿©ÁÙ ¶§´Â ¸ØÃß±â
             Time.timeScale = 0;
 
-            //ï¿½Ì¸ï¿½ Ç¥ï¿½ï¿½
+            //ÀÌ¸§ Ç¥½Ã
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
         }
@@ -121,7 +101,10 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene("");
     }
 
-
+    void Awake()
+    {
+        I = this;
+    }
 
     void FailCard()
     {
