@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [Space(10)]
     public List<Sprite> cardImages = new List<Sprite>();
 
+
+
     private void Start()
     {
         GeneratorBoard();
