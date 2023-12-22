@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
@@ -15,19 +15,19 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
-    //void Mix(int[] mix)
-    //{//               �������� ���� �Լ��Դϴ�. int�迭�� �־��ּ���
-    //    System.Random ran = new System.Random();
-    //    int temp;
-    //    int randomIndex;
-    //    for (int i = 0; i < mix.Length; i++)
-    //    {
-    //        randomIndex = ran.Next(0, mix.Length);
-    //        temp = mix[i];
-    //        mix[i] = mix[randomIndex];
-    //        mix[randomIndex] = temp;
-    //    }
-    //}
+    GameObject firstCard;
+    GameObject secondCard;
+    float gameTime;
+    public int LimitTime;
+    public int PenaltyTime;
+    private void Update()
+    {
+        gameTime += Time.deltaTime;
+        if (gameTime >= LimitTime)
+        {
+            EndGame();
+        }
+    }
     void Shuffle()
     {
         for (int i = 0; i < boardSize * boardSize; i++)
@@ -44,6 +44,23 @@ public class GameManager : MonoBehaviour
         }
 
         queue = new Queue<int>(prefebIdxs);
+    }
+    void Match()
+    {
+        if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
+        {
 
+        }
+        else if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
+        {
+            gameTime += PenaltyTime;
+        }
+        firstCard = null;
+        secondCard = null;
+    }
+    void EndGame()
+    {
+        Time.timeScale = 0;
+        //SceneManager.LoadScene("");
     }
 }
