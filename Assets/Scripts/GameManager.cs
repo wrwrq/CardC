@@ -15,4 +15,17 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    void Mix(int[] mix)
+    {
+        System.Random ran = new System.Random();
+        int temp;
+        int randomIndex;
+        for (int i = 0; i < mix.Length; i++)
+        {
+            randomIndex = ran.Next(0, mix.Length);
+            temp = mix[i];
+            mix[i] = mix[randomIndex];
+            mix[randomIndex] = temp;
+        }
+    }
 }
