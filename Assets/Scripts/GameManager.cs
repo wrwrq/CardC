@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
@@ -15,8 +17,11 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
+
+    public Text tryText;
     GameObject firstCard;
     GameObject secondCard;
+    int tryPoint;
     float gameTime;
     public int LimitTime;
     public int PenaltyTime;
@@ -47,6 +52,7 @@ public class GameManager : MonoBehaviour
     }
     void Match()
     {
+        tryPoint++;
         if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
         {
 
@@ -60,6 +66,8 @@ public class GameManager : MonoBehaviour
     }
     void EndGame()
     {
+        tryText.gameObject.SetActive(true);
+        tryText.text += tryPoint;
         Time.timeScale = 0;
         //SceneManager.LoadScene("");
     }
