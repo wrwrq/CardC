@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             {
                 //카드 닫는 함수 넣기
                 firstCard = null;
-                setTime = 0; //Make it 0 in a match too
+                setTime = 0;
             }
         }
     }
@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
     public void Match()
     {
         tryPoint++;
+
+        //두번째 카드 누르면 초기화
+        setTime = 0;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
