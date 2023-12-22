@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
+
+    public Text tryText;
+    int tryPoint;
 
     static GameManager I;
     GameObject firstCard;
@@ -38,7 +42,7 @@ public class GameManager : MonoBehaviour
             {
                 //카드 닫는 함수 넣기
                 firstCard = null;
-                setTime = 0;
+                setTime = 0; //Make it 0 in the match too.
             }
         }
     }
@@ -61,6 +65,7 @@ public class GameManager : MonoBehaviour
     }
     void Match()
     {
+        tryPoint++;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
@@ -84,6 +89,8 @@ public class GameManager : MonoBehaviour
     }
     void EndGame()
     {
+        tryText.gameObject.SetActive(true);
+        tryText.text += tryPoint;
         Time.timeScale = 0;
         //SceneManager.LoadScene("");
     }
