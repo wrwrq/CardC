@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
             {
                 //카드 닫는 함수 넣기
                 firstCard = null;
-                setTime = 0;
+                setTime = 0; //Make it 0 in a match too
             }
         }
     }
