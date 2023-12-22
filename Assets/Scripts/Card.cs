@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+    public AudioSource audioSource;
+    public AudioClip flip; // 카드 뒤집기 사운드
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +19,11 @@ public class Card : MonoBehaviour
 
     public void openCard()
     {
+
         GetComponent<Animator>().SetBool("isClick", true);
+
+        audioSource.PlayOneShot(flip); // openCard() 함수 작동시 flip 사운드 1회 재생
+
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
         if (GameManager.I.firstCard == null)
