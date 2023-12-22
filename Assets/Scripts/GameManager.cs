@@ -53,7 +53,9 @@ public class GameManager : MonoBehaviour
         }
         else if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
         {
-            gameTime -= PenaltyTime;
+            firstCard.GetComponent<Card>().closeCard();
+            secondCard.GetComponent<Card>().closeCard();
+            gameTime += PenaltyTime;
         }
         firstCard = null;
         secondCard = null;
