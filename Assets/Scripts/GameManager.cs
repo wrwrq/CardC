@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     GameObject firstCard;
     GameObject secondCard;
     float gameTime;
+    float setTime;
     public int LimitTime;
     public int PenaltyTime;
     private void Update()
@@ -26,6 +27,16 @@ public class GameManager : MonoBehaviour
         if (gameTime >= LimitTime)
         {
             EndGame();
+        }
+        if(firstCard != null && secondCard == null)
+        {
+            setTime += Time.deltaTime;
+            if(setTime >= 5)
+            {
+                //카드 닫는 함수 넣기
+                firstCard = null;
+                setTime = 0;
+            }
         }
     }
     void Shuffle()
