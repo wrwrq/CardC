@@ -10,17 +10,15 @@ public class Card : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void openCard()
     {
+        GetComponent<Animator>().SetBool("isClick", true);
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
-
         if (GameManager.I.firstCard == null)
         {
             GameManager.I.firstCard = gameObject;
@@ -34,6 +32,7 @@ public class Card : MonoBehaviour
 
     public void closeCard()
     {
+        GetComponent<Animator>().SetBool("isClick", false);
         transform.Find("Back").gameObject.SetActive(false);
         transform.Find("Front").gameObject.SetActive(true);
     }
