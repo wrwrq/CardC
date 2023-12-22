@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
+    static GameManager I;
     GameObject firstCard;
     GameObject secondCard;
     public GameObject nameCard;
@@ -85,6 +86,11 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         //SceneManager.LoadScene("");
+    }
+
+    void Awake()
+    {
+        I = this;
     }
 
     void FailCard()
