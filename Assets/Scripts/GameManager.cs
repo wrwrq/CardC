@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 
@@ -15,11 +16,12 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
-    static GameManager I;
-    GameObject firstCard;
-    GameObject secondCard;
+    public static GameManager I;
+    public GameObject firstCard;
+    public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
+    public Text timeText;
     float gameTime;
     float setTime;
     public int LimitTime;
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         gameTime += Time.deltaTime;
+        timeText.text = gameTime.ToString("N2");
         if (gameTime >= LimitTime)
         {
             EndGame();
@@ -59,7 +62,7 @@ public class GameManager : MonoBehaviour
 
         queue = new Queue<int>(prefebIdxs);
     }
-    void Match()
+    public void Match()
     {
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
