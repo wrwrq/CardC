@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     GameObject firstCard;
     GameObject secondCard;
+    public GameObject nameCard;
+    public GameObject failCard;
     float gameTime;
     float setTime;
     public int LimitTime;
@@ -60,11 +62,21 @@ public class GameManager : MonoBehaviour
     {
         if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
         {
+            Destroy(firstCard);
+            Destroy(secondCard);
 
+            //소개 보여줄 때는 멈추기
+            Time.timeScale = 0;
+
+            //이름 표시
+            nameCard.SetActive(true);
+            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name);
         }
         else if (firstCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Front").GetComponent<SpriteRenderer>().sprite.name)
         {
             gameTime += PenaltyTime;
+            failCard.SetActive(true);
+            FailCardInvoke();
         }
         firstCard = null;
         secondCard = null;
@@ -73,5 +85,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0;
         //SceneManager.LoadScene("");
+    }
+
+    void FailCard()
+    {
+        failCard.SetActive(false);
+    }
+    void FailCardInvoke()
+    {
+        Invoke("Failcard", 1f);
     }
 }
