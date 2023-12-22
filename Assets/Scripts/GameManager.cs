@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject firstCard;
+    public GameObject secondCard;
+
+    float t = 60f;
+    float settime;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +20,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        t -= Time.deltaTime;
+        //텍스트 UI 만들어서 집어 넣어야하는 곳
         
+        //첫번째 카드 선택 후 5초 카운트 하는 부분, 초기화는 매치되는 함수 만들 때 넣을 예정
+        if (firstCard != null && secondCard == null)
+        {
+            settime += Time.deltaTime;
+            if (settime >= 5)
+            {
+                //카드 원래대로 만드는 함수 넣어두기
+                firstCard = null;
+                settime = 0;
+            }
+        }
     }
 
     void Mix(int[] mix)
