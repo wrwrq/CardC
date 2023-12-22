@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
             //이름 표시
             nameCard.SetActive(true);
-            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
+            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("back").GetComponent<SpriteRenderer>().sprite.name);
         }
         else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
