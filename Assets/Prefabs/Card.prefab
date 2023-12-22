@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 7765960290263627100}
   - component: {fileID: 4110857716932349055}
   - component: {fileID: 7578654810481793801}
+  - component: {fileID: -7471637502983463796}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -353,7 +354,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7471637502983463796}
+        m_TargetAssemblyTypeName: Card, Assembly-CSharp
+        m_MethodName: openCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &7578654810481793801
 Animator:
   serializedVersion: 5
@@ -375,6 +388,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7471637502983463796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8018042815289342813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eedc0e645b0ab4d4188d9e2126fbe59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8150387236644551092
 GameObject:
   m_ObjectHideFlags: 0

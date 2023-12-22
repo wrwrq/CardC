@@ -16,14 +16,16 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     Queue<int> queue = new Queue<int>();
 
+
     public Text tryText;
     int tryPoint;
 
-    static GameManager I;
-    GameObject firstCard;
-    GameObject secondCard;
+    public static GameManager I;
+    public GameObject firstCard;
+    public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
+    public Text timeText;
     float gameTime;
     float setTime;
     public int LimitTime;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         gameTime += Time.deltaTime;
+        timeText.text = gameTime.ToString("N2");
         if (gameTime >= LimitTime)
         {
             EndGame();
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
             {
                 //카드 닫는 함수 넣기
                 firstCard = null;
-                setTime = 0; //Make it 0 in the match too.
+                setTime = 0;
             }
         }
     }
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
 
         queue = new Queue<int>(prefebIdxs);
     }
-    void Match()
+    public void Match()
     {
         tryPoint++;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
