@@ -32,4 +32,6 @@ public class Introduction : MonoBehaviour
         nonmatchName(n);
         Time.timeScale = 1f;
     }
+
+    //I think, be better to create card with a name
 }
