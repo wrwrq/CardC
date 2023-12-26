@@ -149,9 +149,20 @@ public class GameManager : MonoBehaviour
             gameTime += penaltyTime;
             failCard.SetActive(true);
             FailCardInvoke();
+            failScore--; // Card Matched fail -1 point
+            failScoreTxt.text = "Fail Score: " + failScore.ToString();
         }
         firstCard = null;
         secondCard = null;
+
+        TotalScore();// totalscore
+    }
+
+    public void TotalScore()
+    {
+        // timeScore, matchScore, failScore ++ total
+        totalScore = timeScore + matchScore + failScore;
+        totalScoreTxt.text = "Total Score: " + totalScore.ToString();
     }
 
     void EndGame()
