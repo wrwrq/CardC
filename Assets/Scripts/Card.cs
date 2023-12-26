@@ -38,7 +38,6 @@ public class Card : MonoBehaviour
 
     public void openCard()
     {
-        audioSource.PlayOneShot(flip);
         GetComponent<Animator>().SetBool("isClick", true);
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
@@ -90,6 +89,7 @@ public class Card : MonoBehaviour
     //-----------------------------------------------------------------------------------open, close card
     public void OpenCard()
     {
+        audioSource.PlayOneShot(flip);
         if (!isSelect && !GameManager.I.fullCard)
         {
             if (GameManager.I.inChecking)
