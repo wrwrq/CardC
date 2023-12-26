@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
-
+    public GameObject endPanel; // score board
     public GameObject card; //card Prefeb
     public Transform cardStartPot;
     public float cardSizeX;
@@ -333,6 +333,11 @@ public class GameManager : MonoBehaviour
         }
 
         isSingleCardSelect = false;
+    }
+    public void gameOver()
+    {
+        Time.timeScale = 0.0f;
+        endPanel.SetActive(true);
     }
 
     void FlashTimeText()
