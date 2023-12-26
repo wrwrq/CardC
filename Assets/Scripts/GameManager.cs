@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public Text tryText;
     public Text PenaltyText;
+    public Text countTimeText;
 
     [Header("Game State")]
     GameState gameState;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
+    public GameObject countTime;
 
     public GameObject card; //card Prefeb
     public Transform cardStartPot;
@@ -318,10 +320,13 @@ public class GameManager : MonoBehaviour
     IEnumerator SingleCardTimeRunCo()
     {
         isSingleCardSelect = true;
-        float time = setTime;
+        setTime = 5;
+        countTime.SetActive(true);
+
         while(secondCard == null)
         {
-            if (time <= 0)
+            countTimeText.text = setTime.ToString("N0");
+            if (setTime <= 0)
             {
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
