@@ -28,17 +28,15 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     GameState gameState;
     bool isSingleCardSelect;
+    //board Size
     public Transform board;
     public int boardSizeX;
     public int boardSizeY;
-
     public int matchCount; //Clear conditions
-
     public int tryPoint; //count, flip card
-
     public bool inChecking;
-    public bool fullCard;
-
+    public bool fullCard;//first,secondCard
+    public float timeTheCardIsOpen;
 
     [Header("Card")]
     int[] prefebIdxs;
@@ -49,11 +47,12 @@ public class GameManager : MonoBehaviour
 
     public GameObject card; //card Prefeb
     public Transform cardStartPot;
+    //Card Size
     public float cardSizeX;
     public float cardSizeY;
     [Range(0,1)]
     public float outLinePercent;
-    public List<Sprite> cardImages = new List<Sprite>();
+    public List<Sprite> cardImages = new List<Sprite>();//Card Image
     public List<GameObject> cardPack = new List<GameObject>();
     Queue<int> queue = new Queue<int>();
     int[] prefebsIdx;
@@ -67,7 +66,7 @@ public class GameManager : MonoBehaviour
     [Header("Time")]
     public Text timeText;
     float gameTime = 30.00f;   // I think we'd better run out of time.
-    float setTime; //only one card flip, count down parameter
+    public float setTime; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime; // choose not matched card, deduction time
 
@@ -81,8 +80,9 @@ public class GameManager : MonoBehaviour
     {
         audioSource.clip = bgm;
         audioSource.Play();
+        gameState = GameState.Ready;
         GeneratorBoard();
-        gameState = GameState.Start;
+        
     }
 
 
@@ -104,7 +104,11 @@ public class GameManager : MonoBehaviour
         //        setTime = 0;
         //    }
         //}
-        //RunTime();
+        if(gameState == GameState.Start)
+        {
+        RunTime();
+
+        }
     }
 
 
@@ -202,14 +206,13 @@ public class GameManager : MonoBehaviour
 
                 float x = (-boardSizeX / 2f + i + .5f) * cardSizeX;
                 float y = (-boardSizeY / 2f + j + .5f) * cardSizeY;
-                //GameObject newCard = Instantiate(card, cardStartPot.position, Quaternion.identity);
-                GameObject newCard = Instantiate(card, new Vector3(x,y,0), Quaternion.identity);
+                GameObject newCard = Instantiate(card, cardStartPot.position, Quaternion.identity);
+                //GameObject newCard = Instantiate(card, new Vector3(x,y,0), Quaternion.identity);
 
                 newCard.GetComponent<Card>().SetCoordAndName(x, y, name);
 
                 newCard.name = "Card";
 
-                //newCard.GetComponent<Card>().front.GetComponent<SpriteRenderer>().sprite = cardImages[idx];
                 newCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite = cardImages[idx];
 
                 newCard.transform.localScale = newCard.transform.localScale * (1 - outLinePercent);
@@ -238,7 +241,6 @@ public class GameManager : MonoBehaviour
    IEnumerator Match2Co()
     {
         fullCard = true;
-        setTime = 0;
 
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
@@ -281,7 +283,7 @@ public class GameManager : MonoBehaviour
             gameTime -= Time.deltaTime;
             timeText.text = gameTime.ToString("N2");
 
-            if (gameTime <= 0)
+            if (gameTime <= 0) //Game Over
             {
                 gameState = GameState.GameOver;
                 Debug.Log("Game Over!");
@@ -313,8 +315,7 @@ public class GameManager : MonoBehaviour
                 matchCardReset();
                 break;
             }
-            setTime -= Time.deltaTime;
-            Debug.Log(setTime);
+            time -= Time.deltaTime;
             yield return null;
         }
 
@@ -332,5 +333,58 @@ public class GameManager : MonoBehaviour
     }
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
+
+    //-----------------------------------------------------------------------------------Start Cart Effect
+    public bool AllCheckCardOriginalPosition()
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            float x = cardPack[i].GetComponent<Card>().x;
+            float y = cardPack[i].GetComponent<Card>().y;
+
+            if (cardPack[i].transform.position != new Vector3(x, y, 0))
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    public void AllOpenCard()
+    {
+        StartCoroutine(AllCardOpenCo());
+    }
+
+
+    IEnumerator AllCardOpenCo()
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(front, back);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(timeTheCardIsOpen);
+
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(back, front);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        gameState = GameState.Start;
+
+    }
+    //-----------------------------------------------------------------------------------Start Cart Effect
 
 }
