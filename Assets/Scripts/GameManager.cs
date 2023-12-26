@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public Text tryText;
-
+    public Text PenaltyText;
 
     [Header("Game State")]
     GameState gameState;
@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
     public Text timeText;
     float gameTime = 30.00f;   // I think we'd better run out of time.
     float setTime; //only one card flip, count down parameter
-    public int limitTime;
     public int penaltyTime; // choose not matched card, deduction time
 
 
@@ -107,7 +106,14 @@ public class GameManager : MonoBehaviour
         //RunTime();
     }
 
-
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "+" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
+    }
 
     public void Match()
     {
@@ -258,7 +264,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Not matched!");
             firstCard.GetComponent<Card>().CloseCard();
             secondCard.GetComponent<Card>().CloseCard();
-
+            StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
         }
         matchCardReset();
