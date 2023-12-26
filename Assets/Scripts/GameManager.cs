@@ -91,8 +91,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        gameTime += Time.deltaTime;
-        timeText.text = gameTime.ToString("N2");
         //if (gameTime >= limitTime)
         //{
         //    EndGame();
@@ -108,7 +106,8 @@ public class GameManager : MonoBehaviour
         //        setTime = 0;
         //    }
         //}
-        //RunTime();
+        RunTime();
+        SingleCardTimeRunCo();
     }
 
     IEnumerator PenaltyUi()
@@ -330,6 +329,7 @@ public class GameManager : MonoBehaviour
             {
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
+                countTime.SetActive(false);
                 break;
             }
             setTime -= Time.deltaTime;
