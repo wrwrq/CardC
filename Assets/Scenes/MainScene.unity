@@ -7603,6 +7603,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: setTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: tryText
       value: 
       objectReference: {fileID: 533867126}
@@ -7614,6 +7618,10 @@ PrefabInstance:
       propertyPath: failCard
       value: 
       objectReference: {fileID: 1397649863}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameTime
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: nameCard
       value: 
@@ -7634,6 +7642,10 @@ PrefabInstance:
       propertyPath: countTimeText
       value: 
       objectReference: {fileID: 494089841}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: timeTheCardIsOpen
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6662651472532732880, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: m_Name
       value: GameManager

@@ -72,8 +72,8 @@ public class GameManager : MonoBehaviour
     public GameObject countTime;
     public Text countTimeText;
 
-    float gameTime=10f;   // I think we'd better run out of time.
-    float setTime = 5; //only one card flip, count down parameter
+    public float gameTime;   // I think we'd better run out of time.
+    public float setTime; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime;
 
