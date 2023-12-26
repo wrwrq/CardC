@@ -31,10 +31,17 @@ public class GameManager : MonoBehaviour
     float setTime;
     public int LimitTime;
     public int PenaltyTime;
+    private bool isFlashing = false;
+
     private void Update()
     {
         gameTime += Time.deltaTime;
         timeText.text = gameTime.ToString("N2");
+
+        if (gameTime >= LimitTime - 5)
+		{
+            FlashText();
+		}
         if (gameTime >= LimitTime)
         {
             EndGame();
@@ -49,7 +56,15 @@ public class GameManager : MonoBehaviour
                 setTime = 0;
             }
         }
+
     }
+
+    void FlashText()
+	{
+        isFlashing = !isFlashing;
+
+        timeText.color = isFlashing ? Color.red : Color.black;
+	}
     void Shuffle()
     {
         for (int i = 0; i < boardSize * boardSize; i++)
