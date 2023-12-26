@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     [Header("Time")]
     public Text timeText;
     float gameTime;   // I think we'd better run out of time.
-    float setTime; //only one card flip, count down parameter
+    float setTime = 5; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime; // choose not matched card, deduction time
 
@@ -87,22 +87,23 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        //gameTime += Time.deltaTime;
-        //timeText.text = gameTime.ToString("N2");
+        gameTime += Time.deltaTime;
+        timeText.text = gameTime.ToString("N2");
         //if (gameTime >= limitTime)
         //{
         //    EndGame();
         //}
-        //if (firstCard != null && secondCard == null)
-        //{
-        //    setTime += Time.deltaTime;
-        //    if (setTime >= 5)
-        //    {
-        //        //ī�� �ݴ� �Լ� �ֱ�
-        //        firstCard = null;
-        //        setTime = 0;
-        //    }
-        //}
+        if (firstCard != null && secondCard == null)
+        {
+            setTime -= Time.deltaTime;
+            if (setTime <= 0)
+            {
+                firstCard.GetComponent<Card>().CloseCard();
+                firstCard = null;
+                setTime = 5;
+                inChecking = false;
+            }
+        }
 
     }
 
@@ -112,17 +113,16 @@ public class GameManager : MonoBehaviour
     {
         tryPoint++;
 
-        //�ι�° ī�� ������ �ʱ�ȭ
         setTime = 0;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
             Destroy(secondCard);
 
-            //�Ұ� ������ ���� ���߱�
+            
             Time.timeScale = 0;
 
-            //�̸� ǥ��
+            
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
         }
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
    IEnumerator Match2Co()
     {
         fullCard = true;
-        setTime = 0;
+        setTime = 5;
 
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
@@ -250,6 +250,9 @@ public class GameManager : MonoBehaviour
 
             Destroy(firstCard);
             Destroy(secondCard);
+
+            nameCard.SetActive(true);
+            nameCard.GetComponent<Introduction>().matchName(firstName);
         }
         else
         {
@@ -257,6 +260,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Not matched!");
             firstCard.GetComponent<Card>().CloseCard();
             secondCard.GetComponent<Card>().CloseCard();
+
+            failCard.SetActive(true);
+            Invoke("Failcard", 1f);
 
             gameTime -= penaltyTime;
         }
