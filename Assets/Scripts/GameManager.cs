@@ -86,7 +86,6 @@ public class GameManager : MonoBehaviour
 
     public float gameTime;   // I think we'd better run out of time.
     public float setTime; //only one card flip, count down parameter
-    public int limitTime;
     public int penaltyTime;
 
 
@@ -112,10 +111,6 @@ public class GameManager : MonoBehaviour
             RunTime();
 
         }
-        //if (gameTime >= limitTime)
-        //{
-        //    EndGame();
-        //}
     }
 
     IEnumerator PenaltyUi()
@@ -268,6 +263,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Match2Co()
     {
         fullCard = true;
+        countTime.SetActive(false);
 
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
