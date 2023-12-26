@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
+    public AudioSource audioSource;
+    public AudioClip success;
+    public AudioClip fail; 
+    public AudioClip bgm;
     public Text timeText;
     public Text PenaltyText;
     float gameTime;
@@ -33,7 +37,13 @@ public class GameManager : MonoBehaviour
     public int PenaltyTime;
     private bool isFlashing = false;
 
-    private void Update()
+    void Start()
+    {
+        audioSource.clip = bgm;
+        audioSource.Play();
+    }
+
+        private void Update()
     {
         gameTime += Time.deltaTime;
         timeText.text = gameTime.ToString("N2");
