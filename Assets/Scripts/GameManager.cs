@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     //Card Size
     public float cardSizeX;
     public float cardSizeY;
-    [Range(0,1)]
+    [Range(0, 1)]
     public float outLinePercent;
     //Card image
     public List<Sprite> cardImages = new List<Sprite>();
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.Start)
         {
-        RunTime();
+            RunTime();
 
         }
         //if (gameTime >= limitTime)
@@ -233,7 +233,7 @@ public class GameManager : MonoBehaviour
                 float x = (-boardSizeX / 2f + i + .5f) * cardSizeX;
                 float y = (-boardSizeY / 2f + j + .5f) * cardSizeY;
                 //GameObject newCard = Instantiate(card, cardStartPot.position, Quaternion.identity);
-                GameObject newCard = Instantiate(card, new Vector3(x,y,0), Quaternion.identity);
+                GameObject newCard = Instantiate(card, new Vector3(x, y, 0), Quaternion.identity);
 
                 newCard.GetComponent<Card>().SetCoordAndName(x, y, name);
 
@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Match2Co());
     }
 
-   IEnumerator Match2Co()
+    IEnumerator Match2Co()
     {
         fullCard = true;
 
@@ -312,7 +312,7 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------------Time
     void RunTime()//타이머
     {
-        if(gameState == GameState.Start)
+        if (gameState == GameState.Start)
         {
             gameTime -= Time.deltaTime;
             timeText.text = gameTime.ToString("N2");
@@ -324,7 +324,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Game Over!");
             }
 
-            if(firstCard != null && secondCard == null && !isSingleCardSelect)
+            if (firstCard != null && secondCard == null && !isSingleCardSelect)
             {
                 StartCoroutine(SingleCardTimeRunCo());
             }
@@ -344,8 +344,8 @@ public class GameManager : MonoBehaviour
         isSingleCardSelect = true;
         float time = setTime;
         countTime.SetActive(true);
-        
-        while(secondCard == null)
+
+        while (secondCard == null)
         {
             countTimeText.text = time.ToString("N0");
             if (time <= 0)
@@ -442,70 +442,4 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Start;
 
     }
-    //-----------------------------------------------------------------------------------Start Cart Effect
-
-
-
-    //    클래스 선언
-    //    public Text timeScoreTxt;
-    //    public Text matchScoreTxt;
-    //    public Text failScoreTxt;
-    //    public Text totalScoreTxt;
-
-    //    private int timeScore = 0;
-    //    private int matchScore = 0;
-    //    private int failScore = 0;
-    //    private int totalScore = 0;
-
-
-    //1. 남은 시간 당 점수 표시
-
-    //    void RunTime()에서
-
-    //    timeScoreTxt.text = timeScore.ToString();    // 점수 업데이트
-    //    timeScore = Mathf.RoundToInt(gameTime);  // 초당 1점 점수 계산
-
-
-    //2. 성공시  10점 증가
-
-    //        public void MatchSuccess() 라는 함수 만들었음
-    //    {
-    //        // 매칭 성공 시 matchScore를 10 증가
-    //        matchScore += 10;
-    //        matchScoreTxt.text = matchScore.ToString();
-
-    //        Time.timeScale = 0;
-
-    //        nameCard.SetActive(true);
-    //        nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
-    //        
-    //    }
-
-
-
-    //3. 실패시 1점 감소 
-
-
-    //public void Match() 함수 안의 else if에 삽입
-
-    //        failScore--;
-    //        failScoreTxt.text = failScore.ToString();  
-    //    // 매칭 실패 시 failScore를 1 감소
-
-    //! 안됨
-
-
-
-    //4.     다 합쳐서 표시
-
-    //      public void TotalScore()
-    //    {
-    //        // timeScore, matchScore, failScore ++ total
-
-    //        totalScore = timeScore + matchScore + failScore;
-    //        totalScoreTxt.text = totalScore.ToString();
-    //    }
-
-
-    //! 안됨
 }
