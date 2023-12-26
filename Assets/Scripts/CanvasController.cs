@@ -5,19 +5,16 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
-    public Canvas titleCanvas;
-    public Canvas stageCanvas;
-
-
     public GameObject title;
     public GameObject stage;
     bool onCanvas;
 
 
-    public void ToggleCanvas()
+    public void ToggleObjects()
     {
-        titleCanvas.enabled = !titleCanvas.enabled;
-        stageCanvas.enabled = !stageCanvas.enabled;
+        title.SetActive(!title.activeSelf);
+        stage.SetActive(!stage.activeSelf);
+
     }
 
     //------------------------------------------------------------Test Code
