@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         //        setTime = 0;
         //    }
         //}
-        //RunTime();
+        RunTime();
     }
 
 
@@ -287,10 +287,10 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Game Over!");
             }
 
-            if(firstCard != null && secondCard == null && !isSingleCardSelect)
-            {
-                StartCoroutine(SingleCardTimeRunCo());
-            }
+            //if(firstCard != null && secondCard == null && !isSingleCardSelect)
+            //{
+            //    StartCoroutine(SingleCardTimeRunCo());
+            //}
 
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절

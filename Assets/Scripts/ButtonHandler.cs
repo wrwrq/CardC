@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class ButtonHandler : MonoBehaviour
 {
-	public void StartButton()
+	public void Stage1Button()
 	{
-		SceneManager.LoadScene("MainScene");
+		SceneManager.LoadScene("Stage1");
 	}
 }
 
