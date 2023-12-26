@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
             secondCard.GetComponent<Card>().CloseCard();
 
             failCard.SetActive(true);
-            Invoke("Failcard", 1f);
+            FailCardInvoke();
 
             gameTime -= penaltyTime;
         }
