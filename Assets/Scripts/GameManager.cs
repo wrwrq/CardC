@@ -268,6 +268,7 @@ public class GameManager : MonoBehaviour
     IEnumerator Match2Co()
     {
         fullCard = true;
+        countTime.SetActive(false);
 
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
