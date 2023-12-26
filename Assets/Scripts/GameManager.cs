@@ -199,7 +199,12 @@ public class GameManager : MonoBehaviour
     }
     void Clear()
     {
-        PlayerPrefs.SetInt("Unlock", gameLevel + 1);
+        gameLevel++;
+        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
+        PlayerPrefs.SetInt("Unlock", gameLevel);
+
+        //새로운 보드 생성(보드스테이트 클래스 생성, 보드스테이트[] 만들기
+        //로컬에서 게임 랩가져와 보드스테이[] 에서 변수 가져와 제네레이터 보드에 넣어서 실행
     }
 
     void Shuffle() //카드 섞기
