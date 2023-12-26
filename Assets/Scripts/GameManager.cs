@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public Transform board;
     public int boardSizeX;
     public int boardSizeY;
-
+    int gameLevel;
     public int matchCount; //Clear conditions
 
     public int tryPoint; //count, flip card
@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameLevel = PlayerPrefs.GetInt("stage");
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
