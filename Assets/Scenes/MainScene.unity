@@ -783,7 +783,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC790\uC720\uB86D\uAC8C \uC801\uC5B4\uC8FC\uC138\uC694"
+  m_Text: "\n\uCF54\uB529\uC774 \uB108\uBB34 \uC5B4\uB824\uC6CC\uC11C \uBC14\uB2E4\uC5D0
+    \uB6F0\uC5B4\uB4E4\uC9C0 \uB9D0\uC9C0 \uACE0\uBBFC\uD558\uACE0 \uC788\uB2E4.
+    \n"
 --- !u!222 &51713352
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2029,7 +2031,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &463884446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9752,7 +9754,7 @@ PrefabInstance:
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: totalScoreTxt
       value: 
-      objectReference: {fileID: 1282683939}
+      objectReference: {fileID: 778823151}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: timeTheCardIsOpen
       value: 1

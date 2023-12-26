@@ -146,14 +146,6 @@ public class GameManager : MonoBehaviour
         secondCard = null;
 
     }
-
-    public void TotalScore()
-    {
-        // timeScore, matchScore, failScore ++ total
-        totalScore = timeScore + matchScore + failScore;
-        totalScoreTxt.text = "Total Score: " + totalScore.ToString();
-    }
-
     void EndGame()
     {
         tryText.gameObject.SetActive(true);
@@ -276,9 +268,8 @@ public class GameManager : MonoBehaviour
 
             Destroy(firstCard);
             Destroy(secondCard);
-            matchScore += 10;
+            matchScore += 10; // Card match successful, 10 point
             matchScoreTxt.text = matchScore.ToString();
-            Debug.Log(matchScore);
 
             Time.timeScale = 0f;
             nameCard.SetActive(true);
@@ -295,13 +286,19 @@ public class GameManager : MonoBehaviour
             Invoke("FailCard", 1f);
             StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
-            failScore--; // Card Matched fail -1 point
+            failScore--; // Card matched failed, -1 point
             failScoreTxt.text = failScore.ToString();
-            Debug.Log("here");
         }
         matchCardReset();
         TotalScore();// totalscore
     }
+    public void TotalScore()
+    {
+        // timeScore, matchScore, failScore ++ total
+        totalScore = timeScore + matchScore + failScore;
+        totalScoreTxt.text = totalScore.ToString() + "점";
+    }
+
 
     void matchCardReset() //초기/
     {
