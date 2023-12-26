@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
@@ -73,6 +74,16 @@ public class GameManager : MonoBehaviour
     public Text timeText;
     public GameObject countTime;
     public Text countTimeText;
+
+    [Header("Score")]
+    public Text timeScoreTxt;
+    public Text matchScoreTxt;
+    public Text failScoreTxt;
+    public Text totalScoreTxt;
+    private int timeScore = 0;
+    private int matchScore = 0;
+    private int failScore = 0;
+    private int totalScore = 0;
 
     public float gameTime;   // I think we'd better run out of time.
     public float setTime; //only one card flip, count down parameter
@@ -309,7 +320,10 @@ public class GameManager : MonoBehaviour
             {
                 FlashTimeText();
             }
+            timeScore = Mathf.RoundToInt(gameTime);
 
+            // timeScore 업데이트
+            timeScoreTxt.text = "Time Score: " + timeScore.ToString();
         }
     }
 
