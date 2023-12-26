@@ -320,10 +320,8 @@ public class GameManager : MonoBehaviour
             {
                 FlashTimeText();
             }
-            timeScore = Mathf.RoundToInt(gameTime);
-
-            // timeScore 업데이트
-            timeScoreTxt.text = "Time Score: " + timeScore.ToString();
+            timeScoreTxt.text = timeScore.ToString();  // timescore update
+            timeScore = Mathf.RoundToInt(gameTime); // 1point per second
         }
     }
 
