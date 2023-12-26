@@ -13,6 +13,8 @@ public class Card : MonoBehaviour
     public GameObject front;
     public GameObject frontImage;
     public GameObject back;
+    public AudioClip flip;
+    public AudioSource audioSource;
     public string cardName;
 
     public float x;
@@ -36,6 +38,7 @@ public class Card : MonoBehaviour
 
     public void openCard()
     {
+        audioSource.PlayOneShot(flip);
         GetComponent<Animator>().SetBool("isClick", true);
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
