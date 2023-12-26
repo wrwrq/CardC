@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         //    setTime += Time.deltaTime;
         //    if (setTime >= 5)
         //    {
-        //        //ī�� �ݴ� �Լ� �ֱ�
+        //        card.GetComponent<Card>.closeCard();
         //        firstCard = null;
         //        setTime = 0;
         //    }
@@ -105,17 +105,17 @@ public class GameManager : MonoBehaviour
     {
         tryPoint++;
 
-        //�ι�° ī�� ������ �ʱ�ȭ
+        
         setTime = 0;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
             Destroy(secondCard);
 
-            //�Ұ� ������ ���� ���߱�
+            
             Time.timeScale = 0;
 
-            //�̸� ǥ��
+
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
         }
@@ -123,9 +123,10 @@ public class GameManager : MonoBehaviour
         {
             gameTime += penaltyTime;
             failCard.SetActive(true);
-            FailCardInvoke();
+            
         }
         firstCard = null;
+        
         secondCard = null;
     }
 
@@ -140,10 +141,6 @@ public class GameManager : MonoBehaviour
     void FailCard()
     {
         failCard.SetActive(false);
-    }
-    void FailCardInvoke()
-    {
-        Invoke("Failcard", 1f);
     }
 
     //--------------------------------------------------------------------------------Board
@@ -242,12 +239,19 @@ public class GameManager : MonoBehaviour
 
             Destroy(firstCard);
             Destroy(secondCard);
+
+            nameCard.SetActive(true);
+            nameCard.GetComponent<Introduction>().matchName(firstName);
         }
         else
         {
             Debug.Log("Not matched!");
             firstCard.GetComponent<Card>().CloseCard();
             secondCard.GetComponent<Card>().CloseCard();
+
+            failCard.SetActive(true);
+            Invoke("FailCard", 1f);
+            
 
             gameTime -= penaltyTime;
         }
