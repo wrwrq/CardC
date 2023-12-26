@@ -33,7 +33,7 @@ public class Card : MonoBehaviour
     void Start()
     {
         currentRadius = maxRadius;
-        //StartCoroutine(RotationCo());
+        StartCoroutine(RotationCo());
     }
 
     void Update()
@@ -117,7 +117,6 @@ public class Card : MonoBehaviour
 
     public void CloseCard()
     {
-        Debug.Log("close");
         DarkenColor();
         CardFlip(back, front);
         isSelect = false;
@@ -184,48 +183,48 @@ public class Card : MonoBehaviour
 
     //-----------------------------------------------------------------------------------Start Cart Effect
 
-    //IEnumerator RotationCo()
-    //{
-    //    while (currentRadius > 0)
-    //    {
-    //        transform.RotateAround(Vector3.zero, Vector3.forward, Time.deltaTime * rotationSpeed);
-    //        transform.position = GetPosition();
-    //        currentRadius -= Time.deltaTime * 1.5f;
-    //        currentRadius = Mathf.Clamp(currentRadius, 0, maxRadius);
-    //        yield return null;
-    //    }
-    //    transform.rotation = Quaternion.Euler(0, 0, 0);
+    IEnumerator RotationCo()
+    {
+        while (currentRadius > 0)
+        {
+            transform.RotateAround(Vector3.zero, Vector3.forward, Time.deltaTime * rotationSpeed);
+            transform.position = GetPosition();
+            currentRadius -= Time.deltaTime * 1.5f;
+            currentRadius = Mathf.Clamp(currentRadius, 0, maxRadius);
+            yield return null;
+        }
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
-    //    StartCoroutine(CardOriginalLocationMoveCo());
-    //}
+        StartCoroutine(CardOriginalLocationMoveCo());
+    }
 
-    //Vector2 GetPosition()
-    //{
-    //    angle += Time.deltaTime * orbitSpeed;
-    //    float x = Mathf.Cos(angle) * currentRadius;
-    //    float y = Mathf.Sin(angle) * currentRadius;
-    //    return new Vector2(x, y);
-    //}
-
-
-    //IEnumerator CardOriginalLocationMoveCo()
-    //{
-    //    float percent = 0;
-
-    //    while (percent < 1)
-    //    {
-    //        percent += Time.deltaTime;
-    //        transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, 0), percent);
-    //        yield return null;
-    //    }
+    Vector2 GetPosition()
+    {
+        angle += Time.deltaTime * orbitSpeed;
+        float x = Mathf.Cos(angle) * currentRadius;
+        float y = Mathf.Sin(angle) * currentRadius;
+        return new Vector2(x, y);
+    }
 
 
-    //    if (GameManager.I.AllCheckCardOriginalPosition())
-    //    {
-    //        GameManager.I.AllOpenCard();
-    //    }
+    IEnumerator CardOriginalLocationMoveCo()
+    {
+        float percent = 0;
 
-    //}
+        while (percent < 1)
+        {
+            percent += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, new Vector3(x, y, 0), percent);
+            yield return null;
+        }
+
+
+        if (GameManager.I.AllCheckCardOriginalPosition())
+        {
+            GameManager.I.AllOpenCard();
+        }
+
+    }
     //-----------------------------------------------------------------------------------Start Cart Effect
 
 

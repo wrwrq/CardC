@@ -26,19 +26,18 @@ public class GameManager : MonoBehaviour
     public Text PenaltyText;
 
     [Header("Game State")]
-    GameState gameState;
-    bool isSingleCardSelect;
+    GameState gameState;// 게임 상태(준비, 시작, 게임오버)
+    bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
+    //board Size
     public int boardSizeX;
     public int boardSizeY;
-
-    public int matchCount; //Clear conditions
-
-    public int tryPoint; //count, flip card
+    public int matchCount; //게임 클리어 조건,
+    public int tryPoint; //카드를 몇번 뒤집었는지 확인하는 변수
 
     public bool inChecking;
     public bool fullCard;
-
+    public float timeTheCardIsOpen;
 
     [Header("Card")]
     int[] prefebIdxs;
@@ -49,14 +48,18 @@ public class GameManager : MonoBehaviour
     public GameObject endPanel; // score board
     public GameObject card; //card Prefeb
     public Transform cardStartPot;
+    //Card Size
     public float cardSizeX;
     public float cardSizeY;
     [Range(0,1)]
     public float outLinePercent;
+    //Card image
     public List<Sprite> cardImages = new List<Sprite>();
     public List<GameObject> cardPack = new List<GameObject>();
     Queue<int> queue = new Queue<int>();
     int[] prefebsIdx;
+
+
 
     [Header("Audio")]
     public AudioSource audioSource;
@@ -91,8 +94,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameState == GameState.Start)
+        {
         RunTime();
-        SingleCardTimeRunCo();
+
+        }
         //if (gameTime >= limitTime)
         //{
         //    EndGame();
@@ -284,7 +290,7 @@ public class GameManager : MonoBehaviour
             gameTime -= Time.deltaTime;
             timeText.text = gameTime.ToString("N2");
 
-            if (gameTime <= 0)
+            if (gameTime <= 0)   //게임 종
             {
                 gameState = GameState.GameOver;
                 Debug.Log("Game Over!");
@@ -344,5 +350,71 @@ public class GameManager : MonoBehaviour
     }
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
+
+
+
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------------Start Cart Effect
+    public bool AllCheckCardOriginalPosition()
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            float x = cardPack[i].GetComponent<Card>().x;
+            float y = cardPack[i].GetComponent<Card>().y;
+
+            if (cardPack[i].transform.position != new Vector3(x, y, 0))
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    public void AllOpenCard()
+    {
+        StartCoroutine(AllCardOpenCo());
+    }
+
+
+    IEnumerator AllCardOpenCo()
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(front, back);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(timeTheCardIsOpen);
+
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(back, front);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        gameState = GameState.Start;
+
+    }
+    //-----------------------------------------------------------------------------------Start Cart Effect
+
+
 
 }
