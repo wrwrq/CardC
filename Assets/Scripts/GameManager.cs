@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject nameCard;
     public GameObject failCard;
-
+    public GameObject endPanel; // score board
     public GameObject card; //card Prefeb
     public Transform cardStartPot;
     public float cardSizeX;
@@ -66,8 +66,10 @@ public class GameManager : MonoBehaviour
 
     [Header("Time")]
     public Text timeText;
+    public GameObject countTime;
+    public Text countTimeText;
 
-    float gameTime= 30f;   // I think we'd better run out of time.
+    float gameTime=10f;   // I think we'd better run out of time.
     float setTime = 5; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime;
@@ -89,24 +91,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        gameTime += Time.deltaTime;
-        timeText.text = gameTime.ToString("N2");
+        RunTime();
+        SingleCardTimeRunCo();
         //if (gameTime >= limitTime)
         //{
         //    EndGame();
         //}
-
-        //if (firstCard != null && secondCard == null)
-        //{
-        //    setTime += Time.deltaTime;
-        //    if (setTime >= 5)
-        //    {
-        //        
-        //        firstCard = null;
-        //        setTime = 0;
-        //    }
-        //}
-        //RunTime();
     }
 
     IEnumerator PenaltyUi()
@@ -260,6 +250,7 @@ public class GameManager : MonoBehaviour
             Destroy(firstCard);
             Destroy(secondCard);
 
+            Time.timeScale = 0f;
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstName);
         }
@@ -271,7 +262,7 @@ public class GameManager : MonoBehaviour
             secondCard.GetComponent<Card>().CloseCard();
 
             failCard.SetActive(true);
-            FailCardInvoke();
+            Invoke("FailCard", 1f);
             StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
         }
@@ -318,13 +309,17 @@ public class GameManager : MonoBehaviour
     IEnumerator SingleCardTimeRunCo()
     {
         isSingleCardSelect = true;
-        float time = setTime;
+        setTime = 5;
+        countTime.SetActive(true);
+        
         while(secondCard == null)
         {
-            if (time <= 0)
+            countTimeText.text = setTime.ToString("N0");
+            if (setTime <= 0)
             {
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
+                countTime.SetActive(false);
                 break;
             }
             setTime -= Time.deltaTime;
@@ -333,6 +328,11 @@ public class GameManager : MonoBehaviour
         }
 
         isSingleCardSelect = false;
+    }
+    public void gameOver()
+    {
+        Time.timeScale = 0.0f;
+        endPanel.SetActive(true);
     }
 
     void FlashTimeText()
