@@ -1438,6 +1438,7 @@ MonoBehaviour:
   nameCard: {fileID: 463884445}
   failCard: {fileID: 1397649863}
   timeText: {fileID: 16593804}
+  PenaltyText: {fileID: 7560336394439560616, guid: e1e3ae1a258b8a34a93fa2275ef432d9, type: 3}
   LimitTime: 30
   PenaltyTime: 0
 --- !u!4 &1244508129
