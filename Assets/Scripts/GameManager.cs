@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
     {
         Text temp = Instantiate(PenaltyText);
         temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
-        temp.text = "+" + penaltyTime.ToString();
+        temp.text = "-" + penaltyTime.ToString();
         yield return new WaitForSeconds(0.5f);
         Destroy(temp.gameObject);
     }
