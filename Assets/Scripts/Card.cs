@@ -93,9 +93,9 @@ public class Card : MonoBehaviour
     //-----------------------------------------------------------------------------------open, close card
     public void OpenCard()
     {
-        audioSource.PlayOneShot(flip);
         if (!isSelect && !GameManager.I.fullCard && GameManager.I.gameState == GameState.Start)
         {
+            audioSource.PlayOneShot(flip);
             if (GameManager.I.inChecking)
             {
                 isSelect = true;
