@@ -26,14 +26,22 @@ public class GameManager : MonoBehaviour
     public GameObject nameCard;
     public GameObject failCard;
     public Text timeText;
+    public Text PenaltyText;
     float gameTime;
     float setTime;
     public int LimitTime;
     public int PenaltyTime;
+    private bool isFlashing = false;
+
     private void Update()
     {
         gameTime += Time.deltaTime;
         timeText.text = gameTime.ToString("N2");
+
+        if (gameTime >= LimitTime - 5)
+		{
+            FlashText();
+		}
         if (gameTime >= LimitTime)
         {
             EndGame();
@@ -48,7 +56,15 @@ public class GameManager : MonoBehaviour
                 setTime = 0;
             }
         }
+
     }
+
+    void FlashText()
+	{
+        isFlashing = !isFlashing;
+
+        timeText.color = isFlashing ? Color.red : Color.black;
+	}
     void Shuffle()
     {
         for (int i = 0; i < boardSize * boardSize; i++)
@@ -87,6 +103,7 @@ public class GameManager : MonoBehaviour
         else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             gameTime += PenaltyTime;
+            StartCoroutine(PenaltyUi());
             failCard.SetActive(true);
             FailCardInvoke();
         }
@@ -113,5 +130,13 @@ public class GameManager : MonoBehaviour
     void FailCardInvoke()
     {
         Invoke("Failcard", 1f);
+    }
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text =  "+" + PenaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
     }
 }
