@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviour
     {
         tryPoint++;
 
-        setTime = 0;
         if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             Destroy(firstCard);
@@ -236,7 +235,6 @@ public class GameManager : MonoBehaviour
    IEnumerator Match2Co()
     {
         fullCard = true;
-        setTime = 5;
 
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
@@ -309,26 +307,26 @@ public class GameManager : MonoBehaviour
     IEnumerator SingleCardTimeRunCo()
     {
         isSingleCardSelect = true;
-        setTime = 5;
+        float time = setTime;
         countTime.SetActive(true);
         
         while(secondCard == null)
         {
-            countTimeText.text = setTime.ToString("N0");
-            if (setTime <= 0)
+            countTimeText.text = time.ToString("N0");
+            if (time <= 0)
             {
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
                 countTime.SetActive(false);
                 break;
             }
-            setTime -= Time.deltaTime;
-            Debug.Log(setTime);
+            time -= Time.deltaTime;
             yield return null;
         }
 
         isSingleCardSelect = false;
     }
+
     public void gameOver()
     {
         Time.timeScale = 0.0f;
