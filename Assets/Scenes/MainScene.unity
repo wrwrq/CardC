@@ -2417,6 +2417,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: fail
+      value: 
+      objectReference: {fileID: 8300000, guid: 92ddb5f0232393a459b472034aa8fb1c, type: 3}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: success
+      value: 
+      objectReference: {fileID: 8300000, guid: 11c2566da756f8f419b88d6585fc19a1, type: 3}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: tryText
       value: 
       objectReference: {fileID: 533867126}
