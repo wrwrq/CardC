@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public GameObject nameCard;
     public GameObject failCard;
     public Text timeText;
+    public Text PenaltyText;
     float gameTime;
     float setTime;
     public int LimitTime;
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             gameTime += PenaltyTime;
+            StartCoroutine(PenaltyUi());
             failCard.SetActive(true);
             FailCardInvoke();
         }
@@ -113,5 +115,13 @@ public class GameManager : MonoBehaviour
     void FailCardInvoke()
     {
         Invoke("Failcard", 1f);
+    }
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text =  "+" + PenaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
     }
 }
