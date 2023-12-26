@@ -9734,9 +9734,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 656642351}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: failScoreTxt
+      value: 
+      objectReference: {fileID: 640362361}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: timeScoreTxt
+      value: 
+      objectReference: {fileID: 1282683939}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: countTimeText
       value: 
       objectReference: {fileID: 494089841}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: matchScoreTxt
+      value: 
+      objectReference: {fileID: 1629649104}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: totalScoreTxt
+      value: 
+      objectReference: {fileID: 1282683939}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: timeTheCardIsOpen
       value: 1
