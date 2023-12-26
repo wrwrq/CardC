@@ -7607,6 +7607,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 533867126}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: endPanel
+      value: 
+      objectReference: {fileID: 1313463301}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: failCard
       value: 
       objectReference: {fileID: 1397649863}
