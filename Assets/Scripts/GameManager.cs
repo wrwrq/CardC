@@ -86,7 +86,6 @@ public class GameManager : MonoBehaviour
 
     public float gameTime;   // I think we'd better run out of time.
     public float setTime; //only one card flip, count down parameter
-    public int limitTime;
     public int penaltyTime;
 
 
@@ -112,10 +111,6 @@ public class GameManager : MonoBehaviour
             RunTime();
 
         }
-        //if (gameTime >= limitTime)
-        //{
-        //    EndGame();
-        //}
     }
 
     IEnumerator PenaltyUi()
