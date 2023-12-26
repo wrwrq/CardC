@@ -28,12 +28,15 @@ public class GameManager : MonoBehaviour
     [Header("Game State")]
     GameState gameState;
     bool isSingleCardSelect;
+    public Transform board;
     public int boardSize;
-    public bool inChecking;
 
     public int matchCount; //Clear conditions
 
     public int tryPoint; //count, flip card
+
+    public bool inChecking;
+    public bool fullCard;
 
 
     [Header("Card")]
@@ -43,12 +46,18 @@ public class GameManager : MonoBehaviour
     public GameObject nameCard;
     public GameObject failCard;
 
+    public GameObject card; //card Prefeb
+    public Transform cardStartPot;
+    public float cardSizeX;
+    public float cardSizeY;
+    [Range(0,1)]
+    public float outLinePercent;
     public List<Sprite> cardImages = new List<Sprite>();
-    
-    //public List<GameObject> matchCardList = new List<GameObject>(); //card match list, Take two cards, compare the two cards
-
+    public List<GameObject> cardPack = new List<GameObject>();
     Queue<int> queue = new Queue<int>();
+    int[] prefebsIdx;
 
+    
 
     [Header("Time")]
     public Text timeText;
@@ -63,46 +72,34 @@ public class GameManager : MonoBehaviour
         I = this;
     }
 
+    private void Start()
+    {
+        GeneratorBoard();
+    }
+
 
     private void Update()
     {
-        gameTime += Time.deltaTime;
-        timeText.text = gameTime.ToString("N2");
-        if (gameTime >= limitTime)
-        {
-            EndGame();
-        }
-        if (firstCard != null && secondCard == null)
-        {
-            setTime += Time.deltaTime;
-            if (setTime >= 5)
-            {
-                //ī�� �ݴ� �Լ� �ֱ�
-                firstCard = null;
-                setTime = 0;
-            }
-        }
+        //gameTime += Time.deltaTime;
+        //timeText.text = gameTime.ToString("N2");
+        //if (gameTime >= limitTime)
+        //{
+        //    EndGame();
+        //}
+        //if (firstCard != null && secondCard == null)
+        //{
+        //    setTime += Time.deltaTime;
+        //    if (setTime >= 5)
+        //    {
+        //        //ī�� �ݴ� �Լ� �ֱ�
+        //        firstCard = null;
+        //        setTime = 0;
+        //    }
+        //}
 
     }
 
 
-    void Shuffle()
-    {
-        for (int i = 0; i < boardSize * boardSize; i++)
-        {
-            prefebIdxs[i] = (i / 2) % cardImages.Count;
-        }
-
-        for (int i = 0; i < boardSize * boardSize; i++)
-        {
-            int randomIdx = Random.Range(i, boardSize * boardSize);
-            int term = prefebIdxs[randomIdx];
-            prefebIdxs[randomIdx] = prefebIdxs[i];
-            prefebIdxs[i] = term;
-        }
-
-        queue = new Queue<int>(prefebIdxs);
-    }
 
     public void Match()
     {
@@ -149,18 +146,95 @@ public class GameManager : MonoBehaviour
         Invoke("Failcard", 1f);
     }
 
+    //--------------------------------------------------------------------------------Board
+    void GeneratorBoard()
+    {
+        if (GameObject.Find("Board"))
+        {
+            DestroyImmediate(GameObject.Find("Board"));
+        }
+        board = new GameObject("Board").transform;
 
+        prefebIdxs = new int[boardSize * boardSize];
+
+        Shuffle();
+
+        StartCoroutine(CreateNewCard());
+
+    }
+
+
+    void Shuffle()
+    {
+        for (int i = 0; i < boardSize * boardSize; i++)
+        {
+            prefebIdxs[i] = (i / 2) % cardImages.Count;
+        }
+
+        for (int i = 0; i < boardSize * boardSize; i++)
+        {
+            int randomIdx = Random.Range(i, boardSize * boardSize);
+            int term = prefebIdxs[randomIdx];
+            prefebIdxs[randomIdx] = prefebIdxs[i];
+            prefebIdxs[i] = term;
+        }
+
+        queue = new Queue<int>(prefebIdxs);
+    }
+
+    IEnumerator CreateNewCard()
+    {
+        //yield return new WaitForSeconds(2f);
+        for (int i = 0; i < boardSize; i++)
+        {
+            for (int j = 0; j < boardSize; j++)
+            {
+                int idx = queue.Dequeue();
+                string name = cardImages[idx].name.Remove(cardImages[idx].name.Length - 1);
+
+                float x = (-boardSize / 2f + i + .5f) * cardSizeX;
+                float y = (-boardSize / 2f + j + .5f) * cardSizeY;
+                //GameObject newCard = Instantiate(card, cardStartPot.position, Quaternion.identity);
+                GameObject newCard = Instantiate(card, new Vector3(x,y,0), Quaternion.identity);
+
+                newCard.GetComponent<Card>().SetCoordAndName(x, y, name);
+
+                newCard.name = "Card";
+
+                //newCard.GetComponent<Card>().front.GetComponent<SpriteRenderer>().sprite = cardImages[idx];
+                newCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite = cardImages[idx];
+
+                newCard.transform.localScale = newCard.transform.localScale * (1 - outLinePercent);
+
+                newCard.transform.parent = board;
+                cardPack.Add(newCard);
+
+                yield return new WaitForSeconds(.05f);
+            }
+        }
+
+    }
+
+    //--------------------------------------------------------------------------------Board
 
 
     //-----------------------------------------------------------------------------------------------------------Test Code
 
     //--------------------------------------------------------------------------------card matching
+
     public void Match2()
     {
+        StartCoroutine(Match2Co());
+    }
+
+   IEnumerator Match2Co()
+    {
+        fullCard = true;
         setTime = 0;
 
-        string firstName = firstCard.GetComponent<Card>().front.GetComponent<SpriteRenderer>().sprite.name;
-        string secondName = secondCard.GetComponent<Card>().front.GetComponent<SpriteRenderer>().sprite.name;
+        yield return new WaitForSeconds(0.8f);
+        string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
+        string secondName = secondCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
 
         if (firstName == secondName)
         {
@@ -177,7 +251,6 @@ public class GameManager : MonoBehaviour
 
             gameTime -= penaltyTime;
         }
-
         matchCardReset();
     }
 
@@ -186,6 +259,7 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
         inChecking = false;
+        fullCard = false;
     }
 
     //--------------------------------------------------------------------------------card matching

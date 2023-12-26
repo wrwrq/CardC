@@ -11,8 +11,17 @@ public class Card : MonoBehaviour
     [Header("Card State")]
     
     public GameObject front;
+    public GameObject frontImage;
     public GameObject back;
     public string cardName;
+
+    public float x;
+    public float y;
+
+    float hsvV = 1;
+
+
+
     //-----------------------------------------------------------------------------------open, close card parameter
 
 
@@ -53,14 +62,36 @@ public class Card : MonoBehaviour
         Invoke("closeCard", 1f);
     }
 
+
+
+    public void SetCoordAndName(float _x, float _y, string _cardName)
+    {
+        x = _x;
+        y = _y;
+        cardName = _cardName;
+    }
+
+
+    //-----------------------------------------------------------------------------------Change BackCard Color
+    public void DarkenColor()
+    {
+        hsvV -= 0.1f;
+        Color newColor = Color.HSVToRGB(0, 0, hsvV);
+
+        back.GetComponent<SpriteRenderer>().color = newColor;
+    }
+    //-----------------------------------------------------------------------------------Change BackCard Color
+
+
     //------------------------------------------------------------------------------------------------Test Code
     //-----------------------------------------------------------------------------------open, close card
     public void OpenCard()
     {
-        if (!isSelect)
+        if (!isSelect && !GameManager.I.fullCard)
         {
             if (GameManager.I.inChecking)
             {
+                isSelect = true;
                 CardFlip(front, back);
                 GameManager.I.secondCard = gameObject;
                 GameManager.I.Match2();
@@ -68,6 +99,7 @@ public class Card : MonoBehaviour
             }
             else
             {
+                isSelect = true;
                 CardFlip(front, back);
                 GameManager.I.inChecking = true;
                 GameManager.I.firstCard = gameObject;
@@ -78,6 +110,7 @@ public class Card : MonoBehaviour
 
     public void CloseCard()
     {
+        DarkenColor();
         CardFlip(back, front);
         isSelect = false;
     }
