@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
     //board Size
     public int boardSizeX;
     public int boardSizeY;
-    int gameLevel;
+    int gameLevel;//   minLevel = 1   maxLevel = 3
 
     public int matchCount; //게임 클리어 조건,
     public int tryPoint; //카드를 몇번 뒤집었는지 확인하는 변수
