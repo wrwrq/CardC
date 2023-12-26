@@ -176,7 +176,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CreateNewCard());
 
     }
-
+    void Clear()
+    {
+        PlayerPrefs.SetInt("Unlock", gameLevel + 1);
+    }
 
     void Shuffle()
     {
