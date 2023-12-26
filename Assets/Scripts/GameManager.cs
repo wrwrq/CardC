@@ -135,26 +135,21 @@ public class GameManager : MonoBehaviour
         {
             Destroy(firstCard);
             Destroy(secondCard);
-
-
             Time.timeScale = 0;
 
 
             nameCard.SetActive(true);
-            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
+            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);          
         }
         else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
         {
             gameTime += penaltyTime;
             failCard.SetActive(true);
             FailCardInvoke();
-            failScore--; // Card Matched fail -1 point
-            failScoreTxt.text = "Fail Score: " + failScore.ToString();
         }
         firstCard = null;
         secondCard = null;
 
-        TotalScore();// totalscore
     }
 
     public void TotalScore()
@@ -285,6 +280,9 @@ public class GameManager : MonoBehaviour
 
             Destroy(firstCard);
             Destroy(secondCard);
+            matchScore += 10;
+            matchScoreTxt.text = matchScore.ToString();
+            Debug.Log(matchScore);
 
             Time.timeScale = 0f;
             nameCard.SetActive(true);
@@ -301,8 +299,12 @@ public class GameManager : MonoBehaviour
             Invoke("FailCard", 1f);
             StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
+            failScore--; // Card Matched fail -1 point
+            failScoreTxt.text = failScore.ToString();
+            Debug.Log("here");
         }
         matchCardReset();
+        TotalScore();// totalscore
     }
 
     void matchCardReset() //초기/

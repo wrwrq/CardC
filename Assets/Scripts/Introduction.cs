@@ -24,6 +24,7 @@ public class Introduction : MonoBehaviour
 
     void nonmatchName(string name)
     {
+        Debug.Log(name);
         transform.Find(name).gameObject.SetActive(false);
     }
     public void ClickName()
