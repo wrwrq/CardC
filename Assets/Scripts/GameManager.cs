@@ -443,4 +443,66 @@ public class GameManager : MonoBehaviour
 
 
 
+    //    클래스 선언
+    //    public Text timeScoreTxt;
+    //    public Text matchScoreTxt;
+    //    public Text failScoreTxt;
+    //    public Text totalScoreTxt;
+
+    //    private int timeScore = 0;
+    //    private int matchScore = 0;
+    //    private int failScore = 0;
+    //    private int totalScore = 0;
+
+
+    //1. 남은 시간 당 점수 표시
+
+    //    void RunTime()에서
+
+    //    timeScoreTxt.text = timeScore.ToString();    // 점수 업데이트
+    //    timeScore = Mathf.RoundToInt(gameTime);  // 초당 1점 점수 계산
+
+
+    //2. 성공시  10점 증가
+
+    //        public void MatchSuccess() 라는 함수 만들었음
+    //    {
+    //        // 매칭 성공 시 matchScore를 10 증가
+    //        matchScore += 10;
+    //        matchScoreTxt.text = matchScore.ToString();
+
+    //        Time.timeScale = 0;
+
+    //        nameCard.SetActive(true);
+    //        nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
+    //        
+    //    }
+
+
+
+    //3. 실패시 1점 감소 
+
+
+    //public void Match() 함수 안의 else if에 삽입
+
+    //        failScore--;
+    //        failScoreTxt.text = failScore.ToString();  
+    //    // 매칭 실패 시 failScore를 1 감소
+
+    //! 안됨
+
+
+
+    //4.     다 합쳐서 표시
+
+    //      public void TotalScore()
+    //    {
+    //        // timeScore, matchScore, failScore ++ total
+
+    //        totalScore = timeScore + matchScore + failScore;
+    //        totalScoreTxt.text = totalScore.ToString();
+    //    }
+
+
+    //! 안됨
 }
