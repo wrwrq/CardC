@@ -33,9 +33,7 @@ public class GameManager : MonoBehaviour
     public int boardSizeX;
     public int boardSizeY;
     int gameLevel;
-    public int matchCount; //Clear conditions
 
-    public int tryPoint; //count, flip card
     public int matchCount; //게임 클리어 조건,
     public int tryPoint; //카드를 몇번 뒤집었는지 확인하는 변수
 
