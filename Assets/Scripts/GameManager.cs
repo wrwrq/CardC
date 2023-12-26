@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Time")]
     public Text timeText;
-    float gameTime;   // I think we'd better run out of time.
+    float gameTime = 30.00f;   // I think we'd better run out of time.
     float setTime; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime; // choose not matched card, deduction time
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
+        gameState = GameState.Start;
     }
 
 
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
         //        setTime = 0;
         //    }
         //}
-
+        //RunTime();
     }
 
 
@@ -291,6 +292,12 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(SingleCardTimeRunCo());
             }
 
+            // 시간이 얼마 안 남았을 때 깜빡거리는 효과
+            if (gameTime <= 10f) // 필요에 따라 조절
+            {
+                FlashTimeText();
+            }
+
         }
     }
 
@@ -312,6 +319,16 @@ public class GameManager : MonoBehaviour
         }
 
         isSingleCardSelect = false;
+    }
+
+    void FlashTimeText()
+    {
+        float flashSpeed = 1f; // 깜빡거림 속도 조절
+        float lerpValue = Mathf.PingPong(Time.time * flashSpeed, 1f);
+        Color originalColor = timeText.color;
+        Color flashColor = new Color(originalColor.r, originalColor.g, originalColor.b, lerpValue);
+
+        timeText.color = flashColor;
     }
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
