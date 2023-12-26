@@ -12,8 +12,8 @@ public class CanvasController : MonoBehaviour
 
     public void ToggleObjects()
     {
-        title.SetActive(!title.activeSelf);
-        stage.SetActive(!stage.activeSelf);
+        title.SetActive(false);
+        stage.SetActive(true);
 
     }
 
@@ -23,7 +23,7 @@ public class CanvasController : MonoBehaviour
         if (onCanvas)
         {
             title.SetActive(false);
-            stage.SetActive(false);
+            stage.SetActive(true);
             onCanvas = false;
         }
         else
