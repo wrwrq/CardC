@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+    public AudioClip flip; // card flip sound
+    public AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,7 @@ public class Card : MonoBehaviour
 
     public void openCard()
     {
+        audioSource.PlayOneShot(flip); // Play sound when opencard()
         GetComponent<Animator>().SetBool("isClick", true);
         transform.Find("Back").gameObject.SetActive(true);
         transform.Find("Front").gameObject.SetActive(false);
