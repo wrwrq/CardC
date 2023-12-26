@@ -341,11 +341,15 @@ MonoBehaviour:
   front: {fileID: 6126615283246957069}
   frontImage: {fileID: 1707409995777825456}
   back: {fileID: 8138061166551558987}
+  x: 0
+  y: 0
+  angle: 0
   flip: {fileID: 8300000, guid: 6b8d38711764d874189cf11c47e9efc6, type: 3}
   audioSource: {fileID: -1573057969424855613}
   cardName: 
-  x: 0
-  y: 0
+  rotationSpeed: 500
+  maxRadius: 8
+  orbitSpeed: 5
 --- !u!82 &-1573057969424855613
 AudioSource:
   m_ObjectHideFlags: 0
