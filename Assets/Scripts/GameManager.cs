@@ -66,6 +66,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Time")]
     public Text timeText;
+    public GameObject countTime;
+    public Text countTimeText;
 
     float gameTime=10f;   // I think we'd better run out of time.
     float setTime = 5; //only one card flip, count down parameter
@@ -308,13 +310,16 @@ public class GameManager : MonoBehaviour
     {
         isSingleCardSelect = true;
         setTime = 5;
+        countTime.SetActive(true);
         
         while(secondCard == null)
         {
+            countTimeText.text = setTime.ToString("N0");
             if (setTime <= 0)
             {
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
+                countTime.SetActive(false);
                 break;
             }
             setTime -= Time.deltaTime;

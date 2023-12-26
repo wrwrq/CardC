@@ -1818,7 +1818,7 @@ GameObject:
   - component: {fileID: 494089842}
   - component: {fileID: 494089841}
   m_Layer: 5
-  m_Name: fail
+  m_Name: countText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
