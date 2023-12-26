@@ -251,7 +251,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(Match2Co());
     }
-
+    
     IEnumerator Match2Co()
     {
         fullCard = true;
@@ -322,6 +322,8 @@ public class GameManager : MonoBehaviour
                 gameState = GameState.GameOver;
                 timeText.text = "0.00";
                 Debug.Log("Game Over!");
+
+                endPanel.SetActive(true); // game end, Score board call
             }
 
             if (firstCard != null && secondCard == null && !isSingleCardSelect)
@@ -360,12 +362,6 @@ public class GameManager : MonoBehaviour
         }
 
         isSingleCardSelect = false;
-    }
-
-    public void gameOver()
-    {
-        Time.timeScale = 0.0f;
-        endPanel.SetActive(true);
     }
 
     void FlashTimeText()
