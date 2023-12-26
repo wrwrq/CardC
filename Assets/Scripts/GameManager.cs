@@ -57,7 +57,11 @@ public class GameManager : MonoBehaviour
     Queue<int> queue = new Queue<int>();
     int[] prefebsIdx;
 
-    
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip success;
+    public AudioClip fail;
+    public AudioClip bgm;
 
     [Header("Time")]
     public Text timeText;
@@ -74,6 +78,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        audioSource.clip = bgm;
+        audioSource.Play();
         GeneratorBoard();
     }
 
@@ -184,7 +190,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CreateNewCard()
     {
-        //yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
         for (int i = 0; i < boardSize; i++)
         {
             for (int j = 0; j < boardSize; j++)
