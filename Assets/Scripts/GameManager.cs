@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
         //        setTime = 0;
         //    }
         //}
-        RunTime();
+        //RunTime();
     }
 
 
