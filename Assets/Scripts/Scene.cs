@@ -14,7 +14,7 @@ public class Scene : MonoBehaviour
         {
             Transform childTrans = this.transform.GetChild(i);
             childTrans.GetComponent<Image>().sprite = UnityEngine.Resources.Load<Sprite>("unlock");
-            childTrans.GetComponent<Button>().onClick.AddListener(childTrans.GetComponent<StartGame>().StartButton);
+            childTrans.GetComponent<Button>().onClick.AddListener(childTrans.GetComponent<ButtonController>().StartButton);
             childTrans.GetComponentInChildren<Text>().text = (1 + i).ToString();
         }
         for (int i = unlock; i < 12; i++)
