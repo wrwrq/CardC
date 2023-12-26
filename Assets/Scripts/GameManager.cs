@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public Text PenaltyText;
 
     [Header("Game State")]
-    GameState gameState;// 게임 상태(준비, 시작, 게임오버)
+    public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
     //board Size
@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     public List<Sprite> cardImages = new List<Sprite>();
     public List<GameObject> cardPack = new List<GameObject>();
     Queue<int> queue = new Queue<int>();
-    int[] prefebsIdx;
 
 
 
@@ -137,10 +136,10 @@ public class GameManager : MonoBehaviour
             Destroy(firstCard);
             Destroy(secondCard);
 
-            
+
             Time.timeScale = 0;
 
-            
+
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);
         }
@@ -172,7 +171,7 @@ public class GameManager : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------Board
-    void GeneratorBoard()
+    void GeneratorBoard() //보드 생성
     {
         if (GameObject.Find("Board"))
         {
@@ -189,7 +188,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void Shuffle()
+    void Shuffle() //카드 섞기
     {
         for (int i = 0; i < prefebIdxs.Length; i++)
         {
@@ -207,7 +206,7 @@ public class GameManager : MonoBehaviour
         queue = new Queue<int>(prefebIdxs);
     }
 
-    IEnumerator CreateNewCard()
+    IEnumerator CreateNewCard() //카드 생성
     {
         yield return new WaitForSeconds(2f);
         for (int i = 0; i < boardSizeX; i++)
@@ -247,7 +246,7 @@ public class GameManager : MonoBehaviour
 
     //--------------------------------------------------------------------------------card matching
 
-    public void Match2()
+    public void Match2() //카드 매칭
     {
         StartCoroutine(Match2Co());
     }
@@ -287,7 +286,7 @@ public class GameManager : MonoBehaviour
         matchCardReset();
     }
 
-    void matchCardReset()
+    void matchCardReset() //초기/
     {
         firstCard = null;
         secondCard = null;
@@ -297,16 +296,17 @@ public class GameManager : MonoBehaviour
 
     //--------------------------------------------------------------------------------card matching
     //--------------------------------------------------------------------------------Time
-    void RunTime()
+    void RunTime()//타이머
     {
         if(gameState == GameState.Start)
         {
             gameTime -= Time.deltaTime;
             timeText.text = gameTime.ToString("N2");
 
-            if (gameTime <= 0)   //게임 종
+            if (gameTime <= 0)   //게임 종료
             {
                 gameState = GameState.GameOver;
+                timeText.text = "0.00";
                 Debug.Log("Game Over!");
             }
 
@@ -325,7 +325,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator SingleCardTimeRunCo()
+    IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
         isSingleCardSelect = true;
         float time = setTime;
