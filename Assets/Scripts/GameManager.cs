@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
 
         if (firstName == secondName)
         {
+            audioSource.PlayOneShot(success);
             Debug.Log("Matched!");
 
             Destroy(firstCard);
@@ -252,6 +253,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(fail);
             Debug.Log("Not matched!");
             firstCard.GetComponent<Card>().CloseCard();
             secondCard.GetComponent<Card>().CloseCard();
