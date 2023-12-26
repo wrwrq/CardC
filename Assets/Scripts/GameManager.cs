@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
     GameState gameState;
     bool isSingleCardSelect;
     public Transform board;
-    public int boardSize;
+    public int boardSizeX;
+    public int boardSizeY;
 
     public int matchCount; //Clear conditions
 
@@ -161,7 +162,7 @@ public class GameManager : MonoBehaviour
         }
         board = new GameObject("Board").transform;
 
-        prefebIdxs = new int[boardSize * boardSize];
+        prefebIdxs = new int[boardSizeX * boardSizeY];
 
         Shuffle();
 
@@ -172,14 +173,14 @@ public class GameManager : MonoBehaviour
 
     void Shuffle()
     {
-        for (int i = 0; i < boardSize * boardSize; i++)
+        for (int i = 0; i < prefebIdxs.Length; i++)
         {
             prefebIdxs[i] = (i / 2) % cardImages.Count;
         }
 
-        for (int i = 0; i < boardSize * boardSize; i++)
+        for (int i = 0; i < prefebIdxs.Length; i++)
         {
-            int randomIdx = Random.Range(i, boardSize * boardSize);
+            int randomIdx = Random.Range(i, prefebIdxs.Length);
             int term = prefebIdxs[randomIdx];
             prefebIdxs[randomIdx] = prefebIdxs[i];
             prefebIdxs[i] = term;
@@ -191,15 +192,15 @@ public class GameManager : MonoBehaviour
     IEnumerator CreateNewCard()
     {
         yield return new WaitForSeconds(2f);
-        for (int i = 0; i < boardSize; i++)
+        for (int i = 0; i < boardSizeX; i++)
         {
-            for (int j = 0; j < boardSize; j++)
+            for (int j = 0; j < boardSizeY; j++)
             {
                 int idx = queue.Dequeue();
                 string name = cardImages[idx].name.Remove(cardImages[idx].name.Length - 1);
 
-                float x = (-boardSize / 2f + i + .5f) * cardSizeX;
-                float y = (-boardSize / 2f + j + .5f) * cardSizeY;
+                float x = (-boardSizeX / 2f + i + .5f) * cardSizeX;
+                float y = (-boardSizeY / 2f + j + .5f) * cardSizeY;
                 //GameObject newCard = Instantiate(card, cardStartPot.position, Quaternion.identity);
                 GameObject newCard = Instantiate(card, new Vector3(x,y,0), Quaternion.identity);
 

@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tryText: {fileID: 0}
   board: {fileID: 0}
-  boardSize: 4
+  boardSizeX: 4
+  boardSizeY: 5
   matchCount: 0
   tryPoint: 0
   inChecking: 0
@@ -72,6 +73,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ec8f1551172bc2d459cd2675f4cb6aa8, type: 3}
   - {fileID: 21300000, guid: 5b236b396967f6c4ea68f5c6540d92cf, type: 3}
   cardPack: []
+  audioSource: {fileID: 0}
+  success: {fileID: 8300000, guid: d85cf5e5adc6ff24fbe9bb4f0ad46dd0, type: 3}
+  fail: {fileID: 8300000, guid: 6b8d38711764d874189cf11c47e9efc6, type: 3}
+  bgm: {fileID: 8300000, guid: 7ed1b2c254e5e0d429e1d20db3934edb, type: 3}
   timeText: {fileID: 0}
   limitTime: 0
   penaltyTime: 0
