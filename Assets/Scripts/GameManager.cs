@@ -31,14 +31,8 @@ public class GameManager : MonoBehaviour
     float setTime;
     public int LimitTime;
     public int PenaltyTime;
-    bool test = true;
     private void Update()
     {
-        if (test && Input.GetKey(KeyCode.D))
-        {
-            test = false;
-            StartCoroutine(PenaltyUi());
-        }
         gameTime += Time.deltaTime;
         timeText.text = gameTime.ToString("N2");
         if (gameTime >= LimitTime)
@@ -127,7 +121,7 @@ public class GameManager : MonoBehaviour
         Text temp = Instantiate(PenaltyText);
         temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
         temp.text =  "+" + PenaltyTime.ToString();
-        yield return new WaitForSeconds(1);
-        Destroy(temp);
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
     }
 }
