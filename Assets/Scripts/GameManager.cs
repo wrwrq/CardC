@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     public Text tryText;
-
+    public Text PenaltyText;
 
     [Header("Game State")]
     GameState gameState;
@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Time")]
     public Text timeText;
-    float gameTime;   // I think we'd better run out of time.
+
+    float gameTime= 30f;   // I think we'd better run out of time.
     float setTime = 5; //only one card flip, count down parameter
     public int limitTime;
     public int penaltyTime; // choose not matched card, deduction time
@@ -82,6 +83,7 @@ public class GameManager : MonoBehaviour
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
+        gameState = GameState.Start;
     }
 
 
@@ -93,21 +95,28 @@ public class GameManager : MonoBehaviour
         //{
         //    EndGame();
         //}
-        if (firstCard != null && secondCard == null)
-        {
-            setTime -= Time.deltaTime;
-            if (setTime <= 0)
-            {
-                firstCard.GetComponent<Card>().CloseCard();
-                firstCard = null;
-                setTime = 5;
-                inChecking = false;
-            }
-        }
 
+        //if (firstCard != null && secondCard == null)
+        //{
+        //    setTime += Time.deltaTime;
+        //    if (setTime >= 5)
+        //    {
+        //        
+        //        firstCard = null;
+        //        setTime = 0;
+        //    }
+        //}
+        //RunTime();
     }
 
-
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "-" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
+    }
 
     public void Match()
     {
@@ -263,7 +272,7 @@ public class GameManager : MonoBehaviour
 
             failCard.SetActive(true);
             FailCardInvoke();
-
+            StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
         }
         matchCardReset();
@@ -297,6 +306,12 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(SingleCardTimeRunCo());
             }
 
+            // 시간이 얼마 안 남았을 때 깜빡거리는 효과
+            if (gameTime <= 10f) // 필요에 따라 조절
+            {
+                FlashTimeText();
+            }
+
         }
     }
 
@@ -318,6 +333,16 @@ public class GameManager : MonoBehaviour
         }
 
         isSingleCardSelect = false;
+    }
+
+    void FlashTimeText()
+    {
+        float flashSpeed = 1f; // 깜빡거림 속도 조절
+        float lerpValue = Mathf.PingPong(Time.time * flashSpeed, 1f);
+        Color originalColor = timeText.color;
+        Color flashColor = new Color(originalColor.r, originalColor.g, originalColor.b, lerpValue);
+
+        timeText.color = flashColor;
     }
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
