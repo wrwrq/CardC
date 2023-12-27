@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     public AudioClip success;
     public AudioClip fail;
     public AudioClip bgm;
+    public AudioClip timer;
 
     [Header("Time")]
     public Text timeText;
@@ -385,6 +386,7 @@ public class GameManager : MonoBehaviour
             if (gameTime <= 10f) // 필요에 따라 조절
             {
                 FlashTimeText();
+                audioSource.PlayOneShot(timer);
             }
             timeScoreTxt.text = timeScore.ToString();  // timescore update
             timeScore = Mathf.RoundToInt(gameTime); // 1point per second

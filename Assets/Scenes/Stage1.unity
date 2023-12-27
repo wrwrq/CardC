@@ -9521,18 +9521,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3535978028393320303, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: setTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: tryText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: endPanel
       value: 
@@ -9541,10 +9529,6 @@ PrefabInstance:
       propertyPath: failCard
       value: 
       objectReference: {fileID: 1397649863}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameTime
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: nameCard
       value: 
@@ -9557,14 +9541,6 @@ PrefabInstance:
       propertyPath: countTime
       value: 
       objectReference: {fileID: 1119522987}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevel
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: boardSizeY
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: cardStartPot
       value: 
@@ -9589,62 +9565,6 @@ PrefabInstance:
       propertyPath: totalScoreTxt
       value: 
       objectReference: {fileID: 778823151}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: timeTheCardIsOpen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.setTime
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.gameTime
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.boardSizeX
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.boardSizeY
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.penaltyTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevelState.timeTheCardIsOpen
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].setTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].gameTime
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].boardSizeX
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].boardSizeY
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].penaltyTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
-      propertyPath: gameLevels.Array.data[0].timeTheCardIsOpen
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6662651472532732880, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: m_Name
       value: GameManager
