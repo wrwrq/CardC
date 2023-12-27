@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 22989752}
         m_TargetAssemblyTypeName: CanvasController, Assembly-CSharp
-        m_MethodName: ToggleCanvas
+        m_MethodName: ToggleObjects
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -281,10 +281,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f079d93ad964240adc16afb259c053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  titleCanvas: {fileID: 757183473}
-  stageCanvas: {fileID: 1558763356}
-  title: {fileID: 0}
-  stage: {fileID: 0}
+  title: {fileID: 757183470}
+  stage: {fileID: 1558763353}
 --- !u!1 &49901685
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +900,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1558763357}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &302602581
 AudioSource:
@@ -2439,7 +2437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1558763354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,7 +2485,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1558763353}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2528,7 +2526,6 @@ RectTransform:
   - {fileID: 537378721}
   - {fileID: 1169046459}
   - {fileID: 759149556}
-  - {fileID: 302602580}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3833,3 +3830,4 @@ SceneRoots:
   - {fileID: 757183474}
   - {fileID: 137031712}
   - {fileID: 1558763357}
+  - {fileID: 302602580}
