@@ -108,9 +108,12 @@ public class GameManager : MonoBehaviour
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
+        Time.timeScale = 1;
+
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
+
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
     }
@@ -121,7 +124,6 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.Start)
         {
             RunTime();
-            SingleCardTimeRunCo();
         }
     }
 
@@ -324,7 +326,7 @@ public class GameManager : MonoBehaviour
         if(matchCount == boardSizeX * boardSizeY/2)
         {
             TotalScore();// totalscore
-            if(setEndpanel == true)
+            if (setEndpanel == true)
             {
                 yield return new WaitForSeconds(0.001f);
                 OnDisable();
@@ -413,6 +415,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    
 
     IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
