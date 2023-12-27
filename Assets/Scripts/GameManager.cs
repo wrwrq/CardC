@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
         //초기화
         Time.timeScale = 1;
-        initialVolume = 0.0f; // 배경 음악의 초기 볼륨으로 설정
+        initialVolume = 0.1f; // 배경 음악의 초기 볼륨으로 설정
         audioSource.volume = initialVolume;
         targetVolume = 0.2f; // 10초 남았을 때의 대상 볼륨으로 설정
 
