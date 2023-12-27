@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         // "Stage" + gameLevel -> 게임 점수
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
-
+        Time.timeScale = 1;
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
