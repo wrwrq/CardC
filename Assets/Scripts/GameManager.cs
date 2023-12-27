@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     public Text timeText;
     public GameObject countTime;
     public Text countTimeText;
+    bool timeIsRunningOug;
 
     [Header("Score")]
     public Text timeScoreTxt;
@@ -121,11 +122,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         initialVolume = 0.1f; // 배경 음악의 초기 볼륨으로 설정
         audioSource.volume = initialVolume;
+        audioSource.pitch = 1;
         targetVolume = 0.2f; // 10초 남았을 때의 대상 볼륨으로 설정
-
-
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
+        timeIsRunningOug = false;
     }
 
 
@@ -427,8 +428,15 @@ public class GameManager : MonoBehaviour
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절
             {
+                if (!timeIsRunningOug)
+                {
+                    timeIsRunningOug = true;
+                    StartCoroutine(SoundPitchUpCo());
+                }
+
                 if (audioSource.volume < targetVolume)
                 {
+                    
                     audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
                 }
                 FlashTimeText();
@@ -439,6 +447,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator SoundPitchUpCo()
+    {
+        while(gameState == GameState.Start)
+        {
+            audioSource.pitch += 0.01f;
+            yield return new WaitForSeconds(.5f);
+        }
+        timeIsRunningOug = false;
+    }
 
     IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
