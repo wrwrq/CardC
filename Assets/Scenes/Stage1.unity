@@ -2901,7 +2901,7 @@ GameObject:
   - component: {fileID: 546675778}
   - component: {fileID: 546675777}
   m_Layer: 5
-  m_Name: bestsocreLabel
+  m_Name: maxsocreLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6883,7 +6883,7 @@ GameObject:
   - component: {fileID: 1412465104}
   - component: {fileID: 1412465103}
   m_Layer: 5
-  m_Name: bestsocreTxt
+  m_Name: maxsocreTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
