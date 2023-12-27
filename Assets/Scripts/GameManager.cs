@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         audioSource.Play();
         GeneratorBoard();
         gameState = GameState.Ready;
+        timeText.text = gameTime.ToString("N2");
     }
 
 

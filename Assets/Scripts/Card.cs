@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class Card : MonoBehaviour
 {
     
-    public bool isSelect;
+    public bool isSelect; //카드 선택 됐는지 확인하는
 
     [Header("Card State")]
     public GameObject front;
     public GameObject frontImage;
     public GameObject back;
+    //카드 위치
     public float x;
     public float y;
     public float angle;
@@ -29,45 +29,11 @@ public class Card : MonoBehaviour
     public float orbitSpeed = 5f; // 센터를 중심으로 주변을 도는 속도
     private float currentRadius; // 현재 반지름
 
-    // Start is called before the first frame update
     void Start()
     {
         currentRadius = maxRadius;
-        StartCoroutine(RotationCo());
+        StartCoroutine(RotationCo()); //등장
     }
-
-    void Update()
-    {
-    }
-
-    public void openCard()
-    {
-        GetComponent<Animator>().SetBool("isClick", true);
-        transform.Find("Back").gameObject.SetActive(true);
-        transform.Find("Front").gameObject.SetActive(false);
-        if (GameManager.I.firstCard == null)
-        {
-            GameManager.I.firstCard = gameObject;
-        }
-        else
-        {
-            GameManager.I.secondCard = gameObject;
-            GameManager.I.Match();
-        }
-    }
-
-    public void closeCard()
-    {
-        GetComponent<Animator>().SetBool("isClick", false);
-        transform.Find("Back").gameObject.SetActive(false);
-        transform.Find("Front").gameObject.SetActive(true);
-    }
-
-    public void closeCardInvoke()
-    {
-        Invoke("closeCard", 1f);
-    }
-
 
 
     public void SetCoordAndName(float _x, float _y, string _cardName)
@@ -88,8 +54,6 @@ public class Card : MonoBehaviour
     }
     //-----------------------------------------------------------------------------------Change BackCard Color
 
-
-    //------------------------------------------------------------------------------------------------Test Code
     //-----------------------------------------------------------------------------------open, close card
     public void OpenCard()
     {
@@ -147,33 +111,6 @@ public class Card : MonoBehaviour
     }
 
     //-----------------------------------------------------------------------------------open, close card
-    //------------------------------------------------------------------------------------------------Test Code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
