@@ -116,7 +116,6 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.Start)
         {
             RunTime();
-
         }
     }
 
@@ -280,7 +279,7 @@ public class GameManager : MonoBehaviour
         {
             TotalScore();// totalscore
             endPanel.SetActive(true);
-
+            Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
 
