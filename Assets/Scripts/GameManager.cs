@@ -440,7 +440,7 @@ public class GameManager : MonoBehaviour
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절
             {
-                if (gameTime <= 10f && audioSource.volume < targetVolume)
+                if (audioSource.volume < targetVolume)
                 {
                     audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
                 }
