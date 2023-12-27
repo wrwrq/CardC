@@ -390,7 +390,7 @@ public class GameManager : MonoBehaviour
         if (savedBestScore == 0 || totalScore > savedBestScore)
         {
             bestScore = totalScore;
-            maxScoreTxt.text = "최고 점수: " + bestScore.ToString() + "점";
+            maxScoreTxt.text = bestScore.ToString() + "점";
 
             PlayerPrefs.SetInt("BestScore", bestScore);
         }
