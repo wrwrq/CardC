@@ -15,8 +15,8 @@ public class ButtonController : MonoBehaviour
 
 	public void RetryButton()
 	{
-		//SceneManager.LoadScene("MainScene");
-		GameManager.I.GeneratorBoard();
+		SceneManager.LoadScene(GameManager.I.gameStageName);
+
 	}
 
 	public void StageButton()

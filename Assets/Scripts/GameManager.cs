@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game State")]
     //게임 난이도
-    public GameLevel gameLevelState;
-
+    //public GameLevel gameLevelState;
     public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
@@ -39,6 +38,8 @@ public class GameManager : MonoBehaviour
     public float setTime; //only one card flip, count down parameter
     public float gameTime;
     public int penaltyTime;
+
+    public string gameStageName;// 게임 스테이지(씬 이름) 이름
     public int gameLevel;//   minLevel = 1   maxLevel = 3
     Color originalColor = Color.black;
 
@@ -100,7 +101,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //PlayerPrefs 
+        // stage -> 게임 랩
+        // "Stage" + gameLevel -> 게임 점수
         gameLevel = PlayerPrefs.GetInt("stage");
+        gameStageName = "Stage" + gameLevel;
+
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
@@ -169,18 +175,18 @@ public class GameManager : MonoBehaviour
         //게임 난이도 설정
         //SetGameState(gameLevels[gameLevel - 1]);
 
-        if (GameObject.Find("Board"))
-        {
-            countTime.SetActive(false);
-            endPanel.SetActive(false);
-            isSingleCardSelect = false;
-            DestroyImmediate(GameObject.Find("Board"));
-            cardPack.Clear();
-            matchCardReset();
-            matchCount = 0;
-            timeText.color = originalColor;
-            gameTime = gameLevelState.gameTime;
-        }
+        //if (GameObject.Find("Board"))
+        //{
+        //    countTime.SetActive(false);
+        //    endPanel.SetActive(false);
+        //    isSingleCardSelect = false;
+        //    DestroyImmediate(GameObject.Find("Board"));
+        //    cardPack.Clear();
+        //    matchCardReset();
+        //    matchCount = 0;
+        //    timeText.color = originalColor;
+        //    gameTime = gameLevelState.gameTime;
+        //}
         board = new GameObject("Board").transform;
 
         prefebIdxs = new int[boardSizeX * boardSizeY];
