@@ -400,7 +400,6 @@ public class GameManager : MonoBehaviour
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
 
-        maxScoreTxt.text = PlayerPrefs.GetFloat("maxScore").ToString("N2");
         if (PlayerPrefs.HasKey("maxScore") == false)
         {
             PlayerPrefs.SetFloat("maxScore", totalScore);
@@ -412,6 +411,7 @@ public class GameManager : MonoBehaviour
                 PlayerPrefs.SetFloat("maxScore", totalScore);
             }
         }
+        maxScoreTxt.text = PlayerPrefs.GetFloat("maxScore").ToString("N0");
     }
 
 
