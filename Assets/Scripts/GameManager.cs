@@ -357,11 +357,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("판넬 등장 후");
                 OnDisable();
             }
-            TotalScore();// totalscore
+            
             Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
-
+        TotalScore();// totalscore
         matchCardReset();
        
     }
