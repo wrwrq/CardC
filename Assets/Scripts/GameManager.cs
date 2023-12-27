@@ -111,21 +111,16 @@ public class GameManager : MonoBehaviour
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
-        Time.timeScale = 1;
-
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
-<<<<<<< Updated upstream
-=======
 
-        
+        //초기화
+        Time.timeScale = 1;
         initialVolume = 0.0f; // 배경 음악의 초기 볼륨으로 설정
         audioSource.volume = initialVolume;
-
         targetVolume = 1.0f; // 10초 남았을 때의 대상 볼륨으로 설정
 
->>>>>>> Stashed changes
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
     }
@@ -169,21 +164,21 @@ public class GameManager : MonoBehaviour
     //}
 
 
-    void SetGameState(GameLevel _gamelevel)
-    {
-        if (endPanel.activeSelf)
-        {
-            endPanel.SetActive(false);
-        }
+    //void SetGameState(GameLevel _gamelevel)
+    //{
+    //    if (endPanel.activeSelf)
+    //    {
+    //        endPanel.SetActive(false);
+    //    }
     
-        boardSizeX = _gamelevel.boardSizeX;
-        boardSizeY = _gamelevel.boardSizeY;
-        timeTheCardIsOpen = _gamelevel.timeTheCardIsOpen;
-        setTime = _gamelevel.setTime;
-        gameTime = _gamelevel.gameTime;
-        penaltyTime = _gamelevel.penaltyTime;
+    //    boardSizeX = _gamelevel.boardSizeX;
+    //    boardSizeY = _gamelevel.boardSizeY;
+    //    timeTheCardIsOpen = _gamelevel.timeTheCardIsOpen;
+    //    setTime = _gamelevel.setTime;
+    //    gameTime = _gamelevel.gameTime;
+    //    penaltyTime = _gamelevel.penaltyTime;
 
-    }
+    //}
 
 
     //shortest record
@@ -307,7 +302,7 @@ public class GameManager : MonoBehaviour
             matchCount++;
             audioSource.PlayOneShot(success);
             //particle effect
-            Destroy(Instantiate(matchEffectParticle, firstCard.transform.position, Quaternion.identity),1f);
+            Destroy(Instantiate(matchEffectParticle, firstCard.transform.position, Quaternion.identity), 1f);
             Destroy(Instantiate(matchEffectParticle, secondCard.transform.position, Quaternion.identity), 1f);
             Debug.Log("Matched!");
             //카드 매칭시 카드 제거
@@ -525,23 +520,21 @@ public class GameManager : MonoBehaviour
 
     }
 
-
-
-
+    //-----------------------------------------------------------------------------------Start Cart Effect
 
 
     //-----------------------------------------------------------------------------------게임 난이도
-    [System.Serializable]
-    public class GameLevel
-    {
-        public int boardSizeX;
-        public int boardSizeY;
-        public float timeTheCardIsOpen;
-        public float setTime;
-        public float gameTime;
-        public int penaltyTime;
+    //[System.Serializable]
+    //public class GameLevel
+    //{
+    //    public int boardSizeX;
+    //    public int boardSizeY;
+    //    public float timeTheCardIsOpen;
+    //    public float setTime;
+    //    public float gameTime;
+    //    public int penaltyTime;
 
-    }
+    //}
 
     //마지막 nameCard 사라지고 endPanel 등장
 
