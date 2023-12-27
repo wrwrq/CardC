@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------------Board
     public void GeneratorBoard() //보드 생성
     {
+        //폐기예정
         //게임 난이도 설정
         //SetGameState(gameLevels[gameLevel - 1]);
 
@@ -187,6 +188,8 @@ public class GameManager : MonoBehaviour
         //    timeText.color = originalColor;
         //    gameTime = gameLevelState.gameTime;
         //}
+        //폐기예정정
+
         board = new GameObject("Board").transform;
 
         prefebIdxs = new int[boardSizeX * boardSizeY];
