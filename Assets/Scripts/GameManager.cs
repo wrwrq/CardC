@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         initialVolume = 0.0f; // 배경 음악의 초기 볼륨으로 설정
         audioSource.volume = initialVolume;
-        targetVolume = 1.0f; // 10초 남았을 때의 대상 볼륨으로 설정
+        targetVolume = 0.2f; // 10초 남았을 때의 대상 볼륨으로 설정
 
 
         gameState = GameState.Ready;
@@ -436,6 +436,10 @@ public class GameManager : MonoBehaviour
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절
             {
+                if (gameTime <= 10f && audioSource.volume < targetVolume)
+                {
+                    audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
+                }
                 FlashTimeText();
                 
             }
