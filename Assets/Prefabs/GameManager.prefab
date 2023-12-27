@@ -93,6 +93,7 @@ MonoBehaviour:
   matchScoreTxt: {fileID: 0}
   failScoreTxt: {fileID: 0}
   totalScoreTxt: {fileID: 0}
+  matchEffectParticle: {fileID: 1029471499257758834, guid: a7314d95902c24ce1be5ccc4c9d5057d, type: 3}
 --- !u!82 &3535978028393320303
 AudioSource:
   m_ObjectHideFlags: 0

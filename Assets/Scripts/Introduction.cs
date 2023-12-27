@@ -48,5 +48,9 @@ public class Introduction : MonoBehaviour
         else return false;
     }
 
+
+
+
+
     //I think, be better to create card with a name
 }

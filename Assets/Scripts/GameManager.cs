@@ -93,7 +93,8 @@ public class GameManager : MonoBehaviour
     private int failScore = 0;
     private int totalScore = 0;
 
-
+    [Header("Effect")]
+    public GameObject matchEffectParticle;
 
     void Awake()
     {
@@ -295,6 +296,9 @@ public class GameManager : MonoBehaviour
         {
             matchCount++;
             audioSource.PlayOneShot(success);
+            //particle effect
+            Destroy(Instantiate(matchEffectParticle, firstCard.transform.position, Quaternion.identity),1f);
+            Destroy(Instantiate(matchEffectParticle, secondCard.transform.position, Quaternion.identity), 1f);
             Debug.Log("Matched!");
             //카드 매칭시 카드 제거
             Destroy(firstCard);
