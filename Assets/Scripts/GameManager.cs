@@ -155,9 +155,9 @@ public class GameManager : MonoBehaviour
     {
         string currentStageName = "Stage" + gameLevel;
         int localDataTimeScore = PlayerPrefs.GetInt(currentStageName);
-        if(localDataTimeScore < timeScore)
+        if(localDataTimeScore < totalScore)
         {
-         PlayerPrefs.SetFloat(currentStageName, timeScore);
+         PlayerPrefs.SetFloat(currentStageName, totalScore);
         }
     }
 
