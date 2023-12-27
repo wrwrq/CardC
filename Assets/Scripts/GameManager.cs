@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
-        gameState = GameState.Start;
+        gameState = GameState.Ready;
     }
 
 
@@ -132,7 +132,6 @@ public class GameManager : MonoBehaviour
             Destroy(secondCard);
             Time.timeScale = 0;
 
-
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);          
         }
@@ -144,8 +143,8 @@ public class GameManager : MonoBehaviour
         }
         firstCard = null;
         secondCard = null;
-
     }
+
     void EndGame()
     {
         tryText.gameObject.SetActive(true);
@@ -158,6 +157,7 @@ public class GameManager : MonoBehaviour
     {
         failCard.SetActive(false);
     }
+
     void FailCardInvoke()
     {
         Invoke("Failcard", 1f);
