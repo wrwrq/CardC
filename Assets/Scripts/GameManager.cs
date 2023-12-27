@@ -136,6 +136,10 @@ public class GameManager : MonoBehaviour
             RunTime();
             SingleCardTimeRunCo();
         }
+        if (gameState == GameState.GameOver)
+        {
+            TotalScore(); // 실패시 점수 호출
+        }
     }
 
     IEnumerator Penaltyui()
