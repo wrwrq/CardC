@@ -435,13 +435,8 @@ public class GameManager : MonoBehaviour
                 audioSource.volume = 0.1f;
             }
 
-            if (firstCard != null && secondCard == null && !isSingleCardSelect)
-            {
-                StartCoroutine(SingleCardTimeRunCo());
-            }
-
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
-            if (gameTime <= 10f) // 필요에 따라 조절
+            else if (gameTime <= 10f) // 필요에 따라 조절
             {
                 if (!timeIsRunningOug)
                 {
@@ -451,12 +446,20 @@ public class GameManager : MonoBehaviour
 
                 if (audioSource.volume < targetVolume)
                 {
-                    
+
                     audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
                 }
                 FlashTimeText();
-                
+
             }
+
+
+            if (firstCard != null && secondCard == null && !isSingleCardSelect)
+            {
+                StartCoroutine(SingleCardTimeRunCo());
+            }
+
+           
             timeScoreTxt.text = timeScore.ToString();  // timescore update
             timeScore = Mathf.RoundToInt(gameTime); // 1point per second
         }
