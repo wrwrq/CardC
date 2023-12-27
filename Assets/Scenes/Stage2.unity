@@ -9714,6 +9714,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: maxScoreTxt
+      value: 
+      objectReference: {fileID: 1412465103}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: cardStartPot
       value: 
       objectReference: {fileID: 656642351}
