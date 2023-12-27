@@ -265,12 +265,13 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(success);
             Debug.Log("Matched!");
-
+            //카드 매칭시 카드 제거
             Destroy(firstCard);
             Destroy(secondCard);
+            //카드 점수 추가
             matchScore += 10; // Card match successful, 10 point
             matchScoreTxt.text = matchScore.ToString();
-
+            //자기소개 오브젝트 활성화
             Time.timeScale = 0f;
             nameCard.SetActive(true);
             nameCard.GetComponent<Introduction>().matchName(firstName);
@@ -279,16 +280,22 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(fail);
             Debug.Log("Not matched!");
+            //카드 다시 원위치
             firstCard.GetComponent<Card>().CloseCard();
             secondCard.GetComponent<Card>().CloseCard();
-
             failCard.SetActive(true);
+            //카드 매칭 실패 효과
             Invoke("FailCard", 1f);
             StartCoroutine(PenaltyUi());
+            //매칭 실패 시간 패널티
             gameTime -= penaltyTime;
+            //카드 점수
             failScore--; // Card matched failed, -1 point
             failScoreTxt.text = failScore.ToString();
         }
+
+        //모든 카드 맞췄을 경우 조건 추가
+
         matchCardReset();
         TotalScore();// totalscore
     }
@@ -388,7 +395,7 @@ public class GameManager : MonoBehaviour
 
 
     //-----------------------------------------------------------------------------------Start Cart Effect
-    public bool AllCheckCardOriginalPosition()
+    public bool AllCheckCardOriginalPosition() //카드가 자기위치에 있는지 확인하는 메서드
     {
         for (int i = 0; i < cardPack.Count; i++)
         {
@@ -405,13 +412,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void AllOpenCard()
+    public void AllOpenCard()// 모든 카드 오픈
     {
         StartCoroutine(AllCardOpenCo());
     }
 
 
-    IEnumerator AllCardOpenCo()
+    IEnumerator AllCardOpenCo() 
     {
         for (int i = 0; i < cardPack.Count; i++)
         {
