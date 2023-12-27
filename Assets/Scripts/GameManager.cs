@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     private int failScore = 0;
     private int totalScore = 0;
 
-    public float gameTime;   // I think we'd better run out of time.
+    public float gameTime;
     public float setTime; //only one card flip, count down parameter
     public int penaltyTime;
 
@@ -113,37 +113,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator PenaltyUi()
-    {
-        Text temp = Instantiate(PenaltyText);
-        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
-        temp.text = "-" + penaltyTime.ToString();
-        yield return new WaitForSeconds(0.5f);
-        Destroy(temp.gameObject);
-    }
 
-    public void Match()
-    {
-        tryPoint++;
-
-        if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
-        {
-            Destroy(firstCard);
-            Destroy(secondCard);
-            Time.timeScale = 0;
-
-            nameCard.SetActive(true);
-            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);          
-        }
-        else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
-        {
-            gameTime += penaltyTime;
-            failCard.SetActive(true);
-            FailCardInvoke();
-        }
-        firstCard = null;
-        secondCard = null;
-    }
 
     void EndGame()
     {
@@ -153,15 +123,7 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene("");
     }
 
-    void FailCard()
-    {
-        failCard.SetActive(false);
-    }
 
-    void FailCardInvoke()
-    {
-        Invoke("Failcard", 1f);
-    }
 
     //--------------------------------------------------------------------------------Board
     void GeneratorBoard() //보드 생성
@@ -243,8 +205,6 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------------Board
 
 
-    //-----------------------------------------------------------------------------------------------------------Test Code
-
     //--------------------------------------------------------------------------------card matching
 
     public void Match2() //카드 매칭
@@ -299,6 +259,17 @@ public class GameManager : MonoBehaviour
         matchCardReset();
         TotalScore();// totalscore
     }
+
+    void FailCard()
+    {
+        failCard.SetActive(false);
+    }
+
+    void FailCardInvoke() 
+    {
+        Invoke("Failcard", 1f);
+    }
+
     public void TotalScore()
     {
         // timeScore, matchScore, failScore ++ total
@@ -306,14 +277,23 @@ public class GameManager : MonoBehaviour
         totalScoreTxt.text = totalScore.ToString() + "점";
     }
 
-
-    void matchCardReset() //초기/
+    void matchCardReset() //초기화
     {
         firstCard = null;
         secondCard = null;
         inChecking = false;
         fullCard = false;
     }
+
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "-" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
+    }
+
 
     //--------------------------------------------------------------------------------card matching
     //--------------------------------------------------------------------------------Time
@@ -381,7 +361,7 @@ public class GameManager : MonoBehaviour
         timeText.color = flashColor;
     }
     //--------------------------------------------------------------------------------Time
-    //-----------------------------------------------------------------------------------------------------------Test Code
+    
 
 
 
