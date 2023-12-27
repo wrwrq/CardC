@@ -5,6 +5,8 @@ using UnityEngine;
 public class Introduction : MonoBehaviour
 {
     string n;
+    bool setClick = false;
+    float clickcount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +31,21 @@ public class Introduction : MonoBehaviour
     }
     public void ClickName()
     {
+        clickcount ++;
         gameObject.SetActive(false);
         nonmatchName(n);
         Time.timeScale = 1f;
+        Debug.Log(clickcount);
+    }
+
+    public bool LastCard(float c)
+    {
+        if (c -1 == clickcount)
+        {
+            setClick = true;
+            return setClick;
+        }
+        else return false;
     }
 
     //I think, be better to create card with a name

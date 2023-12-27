@@ -121,6 +121,25 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.Start)
         {
             RunTime();
+            SingleCardTimeRunCo();
+        }
+    }
+
+    IEnumerator Penaltyui()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "-" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
+    }
+
+    public void Match()
+    {
+        setTime = 0;
+        if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
+        {
+            RunTime();
         }
     }
 
@@ -149,11 +168,6 @@ public class GameManager : MonoBehaviour
         gameTime = _gamelevel.gameTime;
         penaltyTime = _gamelevel.penaltyTime;
 
-    }
-
-    void FailCardInvoke()
-    {
-        Invoke("Failcard", 1f);
     }
 
 
@@ -271,6 +285,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
         string secondName = secondCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
+        Setendpanel();
 
         if (firstName == secondName)
         {
@@ -309,7 +324,12 @@ public class GameManager : MonoBehaviour
         if(matchCount == boardSizeX * boardSizeY/2)
         {
             TotalScore();// totalscore
-            endPanel.SetActive(true);
+            if(setEndpanel == true)
+            {
+                yield return new WaitForSeconds(0.001f);
+                OnDisable();
+            }
+
             Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
@@ -373,8 +393,8 @@ public class GameManager : MonoBehaviour
                 gameState = GameState.GameOver;
                 timeText.text = "0.00";
                 Debug.Log("Game Over!");
-
                 endPanel.SetActive(true); // game end, Score board call
+
             }
 
             if (firstCard != null && secondCard == null && !isSingleCardSelect)
@@ -428,17 +448,6 @@ public class GameManager : MonoBehaviour
         timeText.color = flashColor;
     }
     //--------------------------------------------------------------------------------Time
-    
-
-
-
-
-
-
-
-
-
-
 
 
     //-----------------------------------------------------------------------------------Start Cart Effect
@@ -510,4 +519,22 @@ public class GameManager : MonoBehaviour
         public int penaltyTime;
 
     }
+
+    //마지막 nameCard 사라지고 endPanel 등장
+
+    bool setEndpanel=false;
+    void Setendpanel()
+    {
+        if (nameCard.GetComponent<Introduction>().LastCard(boardSizeX * boardSizeY / 2) == true)
+        {
+            setEndpanel = true;
+        }
+    }
+
+    void OnDisable()
+    {
+        endPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
 }
+
