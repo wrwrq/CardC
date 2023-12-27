@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         int localDataTotalScore = PlayerPrefs.GetInt(currentStageName);
         if(localDataTotalScore < totalScore)
         {
-         PlayerPrefs.SetFloat(currentStageName, totalScore);
+         PlayerPrefs.SetInt(currentStageName, totalScore);
         }
     }
 
