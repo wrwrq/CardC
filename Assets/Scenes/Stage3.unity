@@ -9862,6 +9862,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1119522987}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevel
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: boardSizeX
       value: 6
       objectReference: {fileID: 0}
