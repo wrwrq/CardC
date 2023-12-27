@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
     public void GeneratorBoard() //보드 생성
     {
         //게임 난이도 설정
-        SetGameState(gameLevels[gameLevel]);
+        SetGameState(gameLevels[gameLevel - 1]);
 
         if (GameObject.Find("Board"))
         {
