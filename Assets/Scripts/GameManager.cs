@@ -76,9 +76,7 @@ public class GameManager : MonoBehaviour
     public AudioClip success;
     public AudioClip fail;
     public AudioClip bgm;
-    private float initialVolume;
-    private float targetVolume;
-    
+    public AudioClip timer;
 
     [Header("Time")]
     public Text timeText;
@@ -90,13 +88,14 @@ public class GameManager : MonoBehaviour
     public Text matchScoreTxt;
     public Text failScoreTxt;
     public Text totalScoreTxt;
+    public Text maxScoreTxt;
     private int timeScore = 0;
     private int matchScore = 0;
     private int failScore = 0;
     private int totalScore = 0;
+    private int maxScore;
 
-    [Header("Effect")]
-    public GameObject matchEffectParticle;
+
 
     void Awake()
     {
@@ -111,21 +110,9 @@ public class GameManager : MonoBehaviour
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
-        Time.timeScale = 1;
-
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
-<<<<<<< Updated upstream
-=======
-
-        
-        initialVolume = 0.0f; // 배경 음악의 초기 볼륨으로 설정
-        audioSource.volume = initialVolume;
-
-        targetVolume = 1.0f; // 10초 남았을 때의 대상 볼륨으로 설정
-
->>>>>>> Stashed changes
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
     }
@@ -306,9 +293,6 @@ public class GameManager : MonoBehaviour
         {
             matchCount++;
             audioSource.PlayOneShot(success);
-            //particle effect
-            Destroy(Instantiate(matchEffectParticle, firstCard.transform.position, Quaternion.identity),1f);
-            Destroy(Instantiate(matchEffectParticle, secondCard.transform.position, Quaternion.identity), 1f);
             Debug.Log("Matched!");
             //카드 매칭시 카드 제거
             Destroy(firstCard);
@@ -394,6 +378,19 @@ public class GameManager : MonoBehaviour
         // timeScore, matchScore, failScore ++ total
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
+
+        int saveMaxScore = PlayerPrefs.GetInt("MaxScore", 0);
+        if (saveMaxScore == 0 || totalScore > saveMaxScore)
+        {
+            maxScore = totalScore;
+            PlayerPrefs.SetInt("MaxScore", maxScore);
+
+
+            if (maxScoreTxt != null)
+            {
+                maxScoreTxt.text = maxScore.ToString() + "점";
+            }
+        }
     }
 
 
@@ -423,13 +420,8 @@ public class GameManager : MonoBehaviour
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절
             {
-                    // 10초가 남았을 때 볼륨을 천천히 증가
-                    if (audioSource.volume < targetVolume)
-                    {
-                        audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
-                    }
-                    FlashTimeText();
-                
+                FlashTimeText();
+                audioSource.PlayOneShot(timer);
             }
             timeScoreTxt.text = timeScore.ToString();  // timescore update
             timeScore = Mathf.RoundToInt(gameTime); // 1point per second

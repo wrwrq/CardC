@@ -2901,7 +2901,7 @@ GameObject:
   - component: {fileID: 546675778}
   - component: {fileID: 546675777}
   m_Layer: 5
-  m_Name: maxsocreLabel
+  m_Name: maxscoreLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6883,7 +6883,7 @@ GameObject:
   - component: {fileID: 1412465104}
   - component: {fileID: 1412465103}
   m_Layer: 5
-  m_Name: maxsocreTxt
+  m_Name: maxscoreTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9682,6 +9682,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: setTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: endPanel
       value: 
       objectReference: {fileID: 1313463301}
@@ -9689,6 +9693,10 @@ PrefabInstance:
       propertyPath: failCard
       value: 
       objectReference: {fileID: 1397649863}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameTime
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: nameCard
       value: 
@@ -9701,6 +9709,10 @@ PrefabInstance:
       propertyPath: countTime
       value: 
       objectReference: {fileID: 1119522987}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: maxScoreTxt
+      value: 
+      objectReference: {fileID: 1412465103}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: cardStartPot
       value: 
