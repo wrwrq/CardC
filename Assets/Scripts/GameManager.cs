@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
     public Text tryText;
     public Text PenaltyText;
     public Text countTimeText;
+<<<<<<< Updated upstream
+=======
+    public GameObject endPanel;
+>>>>>>> Stashed changes
 
     [Header("Game State")]
     GameState gameState;
@@ -145,6 +149,7 @@ public class GameManager : MonoBehaviour
         }
         firstCard = null;
         secondCard = null;
+<<<<<<< Updated upstream
     }
 
     void EndGame()
@@ -168,6 +173,27 @@ public class GameManager : MonoBehaviour
     //{
     //    Invoke("Failcard", 1f);
     //}
+>>>>>>> Stashed changes
+=======
+    }
+
+    void EndGame()
+    {
+        tryText.gameObject.SetActive(true);
+        tryText.text += tryPoint;
+        Time.timeScale = 0;
+        //SceneManager.LoadScene("");
+    }
+
+    void FailCard()
+    {
+        failCard.SetActive(false);
+    }
+    void FailCardInvoke()
+    {
+        Invoke("Failcard", 1f);
+    }
+
 >>>>>>> Stashed changes
 
     //--------------------------------------------------------------------------------Board
@@ -289,14 +315,22 @@ public class GameManager : MonoBehaviour
 
         if(matchCount == boardSizeX * boardSizeY/2)
         {
+<<<<<<< Updated upstream
             TotalScore();// totalscore
+=======
+            //TotalScore();// totalscore
+>>>>>>> Stashed changes
             //endPanel.SetActive(true);
             if(setEndpanel == true)
             {
                 yield return new WaitForSeconds(0.001f);
                 OnDisable();
             }
+<<<<<<< Updated upstream
             Clear();
+=======
+            //Clear();
+>>>>>>> Stashed changes
         }
         //모든 카드 맞췄을 경우 조건 추가
 
@@ -328,6 +362,9 @@ public class GameManager : MonoBehaviour
 <<<<<<< Updated upstream
 =======
                 endPanel.SetActive(true); // game end, Score board call
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             }
 
@@ -380,6 +417,7 @@ public class GameManager : MonoBehaviour
     }
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
+<<<<<<< Updated upstream
 
 <<<<<<< Updated upstream
 }
@@ -393,6 +431,8 @@ public class GameManager : MonoBehaviour
 
 
 
+=======
+>>>>>>> Stashed changes
 
 
     //-----------------------------------------------------------------------------------Start Cart Effect
@@ -430,7 +470,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(timeTheCardIsOpen);
+        //yield return new WaitForSeconds(timeTheCardIsOpen);
 
         for (int i = 0; i < cardPack.Count; i++)
         {
@@ -482,6 +522,11 @@ public class GameManager : MonoBehaviour
         endPanel.SetActive(true);
         Time.timeScale = 0f;
     }
+<<<<<<< Updated upstream
+=======
+
+}
+>>>>>>> Stashed changes
 
 }
 >>>>>>> Stashed changes
