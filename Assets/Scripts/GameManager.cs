@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public static GameManager I;
 
     [Header("UI")]
-    public Text tryText;
     public Text PenaltyText;
 
     [Header("Game State")]
@@ -45,7 +44,6 @@ public class GameManager : MonoBehaviour
 
 
     public int matchCount; //게임 클리어 조건,
-    public int tryPoint; //카드를 몇번 뒤집었는지 확인하는 변수
 
     public bool inChecking;
     public bool fullCard;
@@ -121,13 +119,13 @@ public class GameManager : MonoBehaviour
 
 
     //--------------------------------------------------------------------------------폐기 예정
-    void EndGame()
-    {
-        tryText.gameObject.SetActive(true);
-        tryText.text += tryPoint;
-        Time.timeScale = 0;
-        //SceneManager.LoadScene("");
-    }
+    //void EndGame()
+    //{
+    //    tryText.gameObject.SetActive(true);
+    //    tryText.text += tryPoint;
+    //    Time.timeScale = 0;
+    //    //SceneManager.LoadScene("");
+    //}
 
 
     void SetGameState(GameLevel _gamelevel)
