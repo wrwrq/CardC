@@ -113,7 +113,6 @@ public class GameManager : MonoBehaviour
         //PlayerPrefs 
         // stage -> 게임 랩
         // "Stage" + gameLevel -> 게임 점수
-        gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
         audioSource.clip = bgm;
@@ -121,6 +120,8 @@ public class GameManager : MonoBehaviour
         GeneratorBoard();
 
         //초기화
+        PlayerPrefs.SetFloat("maxScore", 0f);
+        maxScoreTxt.text = "0";
         Time.timeScale = 1;
         initialVolume = 0.1f; // 배경 음악의 초기 볼륨으로 설정
         audioSource.volume = initialVolume;
@@ -197,9 +198,20 @@ public class GameManager : MonoBehaviour
     {
         string currentStageName = "Stage" + gameLevel;
         int localDataTotalScore = PlayerPrefs.GetInt(currentStageName);
-        if(localDataTotalScore < totalScore)
+        if (localDataTotalScore < totalScore)
         {
-         PlayerPrefs.SetInt(currentStageName, totalScore);
+            PlayerPrefs.SetInt(currentStageName, totalScore);
+            SetStagemaxScore();
+        }
+    }
+    void SetStagemaxScore()
+    {
+        string stagemaxScoreKey = "StagemaxScore" + gameLevel;
+        int stagemaxScore = PlayerPrefs.GetInt(stagemaxScoreKey, 0);
+
+        if (totalScore > stagemaxScore)
+        {
+            PlayerPrefs.SetInt(stagemaxScoreKey, totalScore);
         }
     }
 
