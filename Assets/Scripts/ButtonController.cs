@@ -8,11 +8,10 @@ using UnityEngine.UI;
 public class ButtonController : MonoBehaviour
 {
 	public CanvasController controller;
+
 	public void StartButton()
 	{
-		int stage = int.Parse(gameObject.GetComponentInChildren<Text>().text);
-		PlayerPrefs.SetInt("stage", stage);
-		Debug.Log(stage);
+	
 		SceneManager.LoadScene("Stage" + GetComponentInChildren<Text>().text);
 	}
 
