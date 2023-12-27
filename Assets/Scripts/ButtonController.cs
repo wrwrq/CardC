@@ -15,18 +15,21 @@ public class ButtonController : MonoBehaviour
 
 	public void RetryButton()
 	{
-		SceneManager.LoadScene("MainScene");
+		//SceneManager.LoadScene("MainScene");
+		GameManager.I.GeneratorBoard();
 	}
 
 	public void StageButton()
 	{
-
+        SceneManager.LoadScene("StageSelection");
 	}
 
-	public void NextButton()
+    public void NextButton()
 	{
-
-	}
+		int newGameLevel = PlayerPrefs.GetInt("Unlock");
+		GameManager.I.gameLevel = newGameLevel;
+        GameManager.I.GeneratorBoard();
+    }
 
 
 	public GameObject SettingCanvas;

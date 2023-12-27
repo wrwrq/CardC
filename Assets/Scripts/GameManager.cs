@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
     public float setTime; //only one card flip, count down parameter
     public float gameTime;
     public int penaltyTime;
-    int gameLevel;//   minLevel = 1   maxLevel = 3
+    public int gameLevel;//   minLevel = 1   maxLevel = 3
+    Color originalColor = Color.black;
+
 
     public int matchCount; //게임 클리어 조건,
     public int tryPoint; //카드를 몇번 뒤집었는지 확인하는 변수
@@ -132,17 +134,23 @@ public class GameManager : MonoBehaviour
 
     void SetGameState(GameLevel _gamelevel)
     {
+        if (endPanel.activeSelf)
+        {
+            endPanel.SetActive(false);
+        }
+    
         boardSizeX = _gamelevel.boardSizeX;
         boardSizeY = _gamelevel.boardSizeY;
         timeTheCardIsOpen = _gamelevel.timeTheCardIsOpen;
         setTime = _gamelevel.setTime;
         gameTime = _gamelevel.gameTime;
         penaltyTime = _gamelevel.penaltyTime;
+
     }
 
 
     //--------------------------------------------------------------------------------Board
-    void GeneratorBoard() //보드 생성
+    public void GeneratorBoard() //보드 생성
     {
         //게임 난이도 설정
         SetGameState(gameLevels[gameLevel]);
@@ -150,6 +158,11 @@ public class GameManager : MonoBehaviour
         if (GameObject.Find("Board"))
         {
             DestroyImmediate(GameObject.Find("Board"));
+            cardPack.Clear();
+            matchCardReset();
+            countTime.SetActive(false);
+            isSingleCardSelect = false;
+            timeText.color = originalColor;
         }
         board = new GameObject("Board").transform;
 
@@ -160,14 +173,13 @@ public class GameManager : MonoBehaviour
         StartCoroutine(CreateNewCard());
 
     }
+
     void Clear()
     {
-        gameLevel++;
-        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
-        PlayerPrefs.SetInt("Unlock", gameLevel);
-
-        //새로운 보드 생성(보드스테이트 클래스 생성, 보드스테이트[] 만들기
-        //로컬에서 게임 랩가져와 보드스테이[] 에서 변수 가져와 제네레이터 보드에 넣어서 실행
+        int newGamelevel = gameLevel++;
+        Debug.Log(gameLevel);
+        gameLevel = Mathf.Clamp(newGamelevel, 0, 3);
+        PlayerPrefs.SetInt("Unlock", newGamelevel);
     }
 
     void Shuffle() //카드 섞기
@@ -292,10 +304,10 @@ public class GameManager : MonoBehaviour
         failCard.SetActive(false);
     }
 
-    void FailCardInvoke() 
-    {
-        Invoke("Failcard", 1f);
-    }
+    //void FailCardInvoke()
+    //{
+    //    Invoke("Failcard", 1f);
+    //}
 
     IEnumerator PenaltyUi()
     {
@@ -369,6 +381,7 @@ public class GameManager : MonoBehaviour
             countTimeText.text = time.ToString("N0");
             if (time <= 0)
             {
+                //카드 틀림, 패널티
                 firstCard.GetComponent<Card>().CloseCard();
                 matchCardReset();
                 countTime.SetActive(false);
@@ -385,8 +398,8 @@ public class GameManager : MonoBehaviour
     {
         float flashSpeed = 1f; // 깜빡거림 속도 조절
         float lerpValue = Mathf.PingPong(Time.time * flashSpeed, 1f);
-        Color originalColor = timeText.color;
-        Color flashColor = new Color(originalColor.r, originalColor.g, originalColor.b, lerpValue);
+        Color changeColor = originalColor;
+        Color flashColor = new Color(changeColor.r, changeColor.g, changeColor.b, lerpValue);
 
         timeText.color = flashColor;
     }

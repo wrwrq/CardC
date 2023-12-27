@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingCanvas: {fileID: 0}
 --- !u!1 &16593802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2418,6 +2419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingCanvas: {fileID: 0}
 --- !u!1 &485259603
 GameObject:
   m_ObjectHideFlags: 0
@@ -9493,6 +9495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SettingCanvas: {fileID: 0}
 --- !u!1 &2108700844
 GameObject:
   m_ObjectHideFlags: 0
@@ -9769,7 +9772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: gameLevels.Array.data[0].gameTime
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: gameLevels.Array.data[0].boardSizeX
