@@ -27,4 +27,20 @@ public class ButtonController : MonoBehaviour
 	{
 
 	}
+
+
+	public GameObject SettingCanvas;
+	public void SettingButton()
+	{
+        SettingCanvas.SetActive(true);
+	}
+	public void ReSetGame()
+	{
+		PlayerPrefs.DeleteAll();
+		SceneManager.LoadScene("StageSelection");
+	}
+	public void CloseMenu()
+	{
+        SettingCanvas.SetActive(false);
+	}
 }
