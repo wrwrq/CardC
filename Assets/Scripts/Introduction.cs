@@ -40,7 +40,7 @@ public class Introduction : MonoBehaviour
 
     public bool LastCard(float c)
     {
-        if (c -1 == clickcount)
+        if (c - 1 == clickcount)
         {
             setClick = true;
             return setClick;

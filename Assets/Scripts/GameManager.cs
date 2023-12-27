@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public float gameTime;
     public int penaltyTime;
 
+    bool setEndpanel;
+
     public string gameStageName;// 게임 스테이지(씬 이름) 이름
     public int gameLevel;//   minLevel = 1   maxLevel = 3
     Color originalColor = Color.black;
@@ -127,6 +129,7 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
         timeIsRunningOug = false;
+        setEndpanel = false;
     }
 
 
@@ -346,13 +349,15 @@ public class GameManager : MonoBehaviour
 
         if(matchCount == boardSizeX * boardSizeY/2)
         {
-            TotalScore();// totalscore
+            
             if(setEndpanel == true)
             {
+                Debug.Log("판넬 등장 전");
                 yield return new WaitForSeconds(0.001f);
+                Debug.Log("판넬 등장 후");
                 OnDisable();
             }
-
+            TotalScore();// totalscore
             Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
@@ -580,13 +585,12 @@ public class GameManager : MonoBehaviour
     //}
 
     //마지막 nameCard 사라지고 endPanel 등장
-
-    bool setEndpanel=false;
     void Setendpanel()
     {
         if (nameCard.GetComponent<Introduction>().LastCard(boardSizeX * boardSizeY / 2) == true)
         {
             setEndpanel = true;
+            Debug.Log("작동");
         }
     }
 
