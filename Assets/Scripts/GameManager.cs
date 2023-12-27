@@ -179,10 +179,10 @@ public class GameManager : MonoBehaviour
 
     void Clear()
     {
-        int newGamelevel = gameLevel++;
+        gameLevel++;
         Debug.Log(gameLevel);
-        gameLevel = Mathf.Clamp(newGamelevel, 0, 3);
-        PlayerPrefs.SetInt("Unlock", newGamelevel);
+        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
+        PlayerPrefs.SetInt("Unlock", gameLevel);
     }
 
     void Shuffle() //카드 섞기
