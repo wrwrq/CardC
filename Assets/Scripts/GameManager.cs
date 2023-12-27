@@ -88,8 +88,6 @@ public class GameManager : MonoBehaviour
     public Text matchScoreTxt;
     public Text failScoreTxt;
     public Text totalScoreTxt;
-    public Text maxScoreTxt;
-    private int bestScore;
     private int timeScore = 0;
     private int matchScore = 0;
     private int failScore = 0;
@@ -110,14 +108,9 @@ public class GameManager : MonoBehaviour
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
-
-        Time.timeScale = 1;
-
-
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
-
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
     }
@@ -128,6 +121,7 @@ public class GameManager : MonoBehaviour
         if (gameState == GameState.Start)
         {
             RunTime();
+            SingleCardTimeRunCo();
         }
     }
 
@@ -330,7 +324,6 @@ public class GameManager : MonoBehaviour
         if(matchCount == boardSizeX * boardSizeY/2)
         {
             TotalScore();// totalscore
-            //마지막 NameCard 사라지고 EndPanel 보여주기
             if(setEndpanel == true)
             {
                 yield return new WaitForSeconds(0.001f);
@@ -383,19 +376,7 @@ public class GameManager : MonoBehaviour
         // timeScore, matchScore, failScore ++ total
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
-
-        int savedBestScore = PlayerPrefs.GetInt("BestScore", 0);
-
-
-        if (savedBestScore == 0 || totalScore > savedBestScore)
-        {
-            bestScore = totalScore;
-            maxScoreTxt.text = bestScore.ToString() + "점";
-
-            PlayerPrefs.SetInt("BestScore", bestScore);
-        }
     }
-
 
 
     //--------------------------------------------------------------------------------card matching
@@ -432,8 +413,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    
 
     IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
