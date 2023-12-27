@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
+	public CanvasController controller;
 	public void StartButton()
 	{
 		SceneManager.LoadScene("Stage" + GetComponentInChildren<Text>().text);
@@ -21,6 +22,7 @@ public class ButtonController : MonoBehaviour
 	public void StageButton()
 	{
         SceneManager.LoadScene("StageSelection");
+		controller.ToggleObjects();
 	}
 
     public void NextButton()
