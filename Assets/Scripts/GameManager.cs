@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
         Destroy(temp.gameObject);
     }
 
+<<<<<<< Updated upstream
     public void Match()
     {
         tryPoint++;
@@ -162,6 +163,12 @@ public class GameManager : MonoBehaviour
     {
         Invoke("Failcard", 1f);
     }
+=======
+    //void FailCardInvoke()
+    //{
+    //    Invoke("Failcard", 1f);
+    //}
+>>>>>>> Stashed changes
 
     //--------------------------------------------------------------------------------Board
     void GeneratorBoard()
@@ -252,6 +259,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         string firstName = firstCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
         string secondName = secondCard.GetComponent<Card>().frontImage.GetComponent<Image>().sprite.name;
+        Setendpanel();
 
         if (firstName == secondName)
         {
@@ -276,6 +284,23 @@ public class GameManager : MonoBehaviour
             StartCoroutine(PenaltyUi());
             gameTime -= penaltyTime;
         }
+<<<<<<< Updated upstream
+=======
+
+        if(matchCount == boardSizeX * boardSizeY/2)
+        {
+            TotalScore();// totalscore
+            //endPanel.SetActive(true);
+            if(setEndpanel == true)
+            {
+                yield return new WaitForSeconds(0.001f);
+                OnDisable();
+            }
+            Clear();
+        }
+        //모든 카드 맞췄을 경우 조건 추가
+
+>>>>>>> Stashed changes
         matchCardReset();
     }
 
@@ -300,6 +325,10 @@ public class GameManager : MonoBehaviour
             {
                 gameState = GameState.GameOver;
                 Debug.Log("Game Over!");
+<<<<<<< Updated upstream
+=======
+                endPanel.SetActive(true); // game end, Score board call
+>>>>>>> Stashed changes
             }
 
             if(firstCard != null && secondCard == null && !isSingleCardSelect)
@@ -352,4 +381,107 @@ public class GameManager : MonoBehaviour
     //--------------------------------------------------------------------------------Time
     //-----------------------------------------------------------------------------------------------------------Test Code
 
+<<<<<<< Updated upstream
 }
+=======
+
+
+
+
+
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------------Start Cart Effect
+    public bool AllCheckCardOriginalPosition() //카드가 자기위치에 있는지 확인하는 메서드
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            float x = cardPack[i].GetComponent<Card>().x;
+            float y = cardPack[i].GetComponent<Card>().y;
+
+            if (cardPack[i].transform.position != new Vector3(x, y, 0))
+            {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    public void AllOpenCard()// 모든 카드 오픈
+    {
+        StartCoroutine(AllCardOpenCo());
+    }
+
+
+    IEnumerator AllCardOpenCo() 
+    {
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(front, back);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(timeTheCardIsOpen);
+
+        for (int i = 0; i < cardPack.Count; i++)
+        {
+            GameObject front = cardPack[i].GetComponent<Card>().front;
+            GameObject back = cardPack[i].GetComponent<Card>().back;
+
+            cardPack[i].GetComponent<Card>().CardFlip(back, front);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        gameState = GameState.Start;
+
+    }
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------------게임 난이도
+    [System.Serializable]
+    public class GameLevel
+    {
+        public int boardSizeX;
+        public int boardSizeY;
+        public float timeTheCardIsOpen;
+        public float setTime;
+        public float gameTime;
+        public int penaltyTime;
+
+    }
+
+    //마지막 nameCard 사라지고 endPanel 등장
+
+    bool setEndpanel=false;
+    void Setendpanel()
+    {
+        if (nameCard.GetComponent<Introduction>().LastCard(boardSizeX * boardSizeY / 2) == true)
+        {
+            setEndpanel = true;
+            Debug.Log("판넬 생성 전");
+        }
+    }
+
+    void OnDisable()
+    {
+        endPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+}
+>>>>>>> Stashed changes
