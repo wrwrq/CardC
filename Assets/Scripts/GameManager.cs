@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         GeneratorBoard();
 
         //초기화
-        PlayerPrefs.SetFloat("maxScore", 0f);
+        PlayerPrefs.SetInt("maxScore", 0);
         maxScoreTxt.text = "0";
         Time.timeScale = 1;
         initialVolume = 0.1f; // 배경 음악의 초기 볼륨으로 설정
