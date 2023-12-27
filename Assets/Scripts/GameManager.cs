@@ -30,9 +30,13 @@ public class GameManager : MonoBehaviour
     public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
-    //board Size
+    //게임 필수 정보
     public int boardSizeX;
     public int boardSizeY;
+    public float timeTheCardIsOpen;
+    public float setTime; //only one card flip, count down parameter
+    public float gameTime;
+    public int penaltyTime;
     int gameLevel;//   minLevel = 1   maxLevel = 3
 
     public int matchCount; //게임 클리어 조건,
@@ -40,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public bool inChecking;
     public bool fullCard;
-    public float timeTheCardIsOpen;
+    
 
     [Header("Card")]
     int[] prefebIdxs;
@@ -84,9 +88,8 @@ public class GameManager : MonoBehaviour
     private int failScore = 0;
     private int totalScore = 0;
 
-    public float gameTime;   // I think we'd better run out of time.
-    public float setTime; //only one card flip, count down parameter
-    public int penaltyTime;
+    
+    
 
 
     void Awake()
@@ -114,37 +117,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator PenaltyUi()
-    {
-        Text temp = Instantiate(PenaltyText);
-        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
-        temp.text = "-" + penaltyTime.ToString();
-        yield return new WaitForSeconds(0.5f);
-        Destroy(temp.gameObject);
-    }
 
-    public void Match()
-    {
-        tryPoint++;
-
-        if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name == secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
-        {
-            Destroy(firstCard);
-            Destroy(secondCard);
-            Time.timeScale = 0;
-
-            nameCard.SetActive(true);
-            nameCard.GetComponent<Introduction>().matchName(firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name);          
-        }
-        else if (firstCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name != secondCard.transform.Find("Back").GetComponent<SpriteRenderer>().sprite.name)
-        {
-            gameTime += penaltyTime;
-            failCard.SetActive(true);
-            FailCardInvoke();
-        }
-        firstCard = null;
-        secondCard = null;
-    }
 
     void EndGame()
     {
@@ -154,15 +127,7 @@ public class GameManager : MonoBehaviour
         //SceneManager.LoadScene("");
     }
 
-    void FailCard()
-    {
-        failCard.SetActive(false);
-    }
 
-    void FailCardInvoke()
-    {
-        Invoke("Failcard", 1f);
-    }
 
     //--------------------------------------------------------------------------------Board
     void GeneratorBoard() //보드 생성
@@ -241,10 +206,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+
     //--------------------------------------------------------------------------------Board
 
-
-    //-----------------------------------------------------------------------------------------------------------Test Code
 
     //--------------------------------------------------------------------------------card matching
 
@@ -264,6 +228,7 @@ public class GameManager : MonoBehaviour
 
         if (firstName == secondName)
         {
+            matchCount++;
             audioSource.PlayOneShot(success);
             Debug.Log("Matched!");
             //카드 매칭시 카드 제거
@@ -295,11 +260,47 @@ public class GameManager : MonoBehaviour
             failScoreTxt.text = failScore.ToString();
         }
 
+        if(matchCount == boardSizeX * boardSizeY/2)
+        {
+            TotalScore();// totalscore
+            endPanel.SetActive(true);
+
+        }
         //모든 카드 맞췄을 경우 조건 추가
 
         matchCardReset();
-        TotalScore();// totalscore
+       
     }
+    //--------------카드 매칭 실패
+    void FailCard()
+    {
+        failCard.SetActive(false);
+    }
+
+    void FailCardInvoke() 
+    {
+        Invoke("Failcard", 1f);
+    }
+
+    IEnumerator PenaltyUi()
+    {
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "-" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
+    }
+    //--------------카드 매칭 실패
+
+
+    void matchCardReset() //초기화
+    {
+        firstCard = null;
+        secondCard = null;
+        inChecking = false;
+        fullCard = false;
+    }
+
     public void TotalScore()
     {
         // timeScore, matchScore, failScore ++ total
@@ -307,14 +308,6 @@ public class GameManager : MonoBehaviour
         totalScoreTxt.text = totalScore.ToString() + "점";
     }
 
-
-    void matchCardReset() //초기/
-    {
-        firstCard = null;
-        secondCard = null;
-        inChecking = false;
-        fullCard = false;
-    }
 
     //--------------------------------------------------------------------------------card matching
     //--------------------------------------------------------------------------------Time
@@ -349,6 +342,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
         isSingleCardSelect = true;
@@ -382,7 +376,7 @@ public class GameManager : MonoBehaviour
         timeText.color = flashColor;
     }
     //--------------------------------------------------------------------------------Time
-    //-----------------------------------------------------------------------------------------------------------Test Code
+    
 
 
 
@@ -444,6 +438,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         gameState = GameState.Start;
+
+    }
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------------게임 난이도
+
+    public class GameLevel
+    {
+        public int boardSizeX;
+        public int boardSizeY;
+
 
     }
 }
