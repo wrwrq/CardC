@@ -109,6 +109,8 @@ public class GameManager : MonoBehaviour
         gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
+        Time.timeScale = 1;
+
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
