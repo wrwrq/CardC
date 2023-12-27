@@ -76,7 +76,9 @@ public class GameManager : MonoBehaviour
     public AudioClip success;
     public AudioClip fail;
     public AudioClip bgm;
-    public AudioClip timer;
+    private float initialVolume;
+    private float targetVolume;
+    
 
     [Header("Time")]
     public Text timeText;
@@ -112,6 +114,16 @@ public class GameManager : MonoBehaviour
         audioSource.clip = bgm;
         audioSource.Play();
         GeneratorBoard();
+<<<<<<< Updated upstream
+=======
+
+        
+        initialVolume = 0.0f; // 배경 음악의 초기 볼륨으로 설정
+        audioSource.volume = initialVolume;
+
+        targetVolume = 1.0f; // 10초 남았을 때의 대상 볼륨으로 설정
+
+>>>>>>> Stashed changes
         gameState = GameState.Ready;
         timeText.text = gameTime.ToString("N2");
     }
@@ -409,8 +421,13 @@ public class GameManager : MonoBehaviour
             // 시간이 얼마 안 남았을 때 깜빡거리는 효과
             if (gameTime <= 10f) // 필요에 따라 조절
             {
-                FlashTimeText();
-                audioSource.PlayOneShot(timer);
+                    // 10초가 남았을 때 볼륨을 천천히 증가
+                    if (audioSource.volume < targetVolume)
+                    {
+                        audioSource.volume = Mathf.Lerp(initialVolume, targetVolume, 1.0f - (gameTime / 10f));
+                    }
+                    FlashTimeText();
+                
             }
             timeScoreTxt.text = timeScore.ToString();  // timescore update
             timeScore = Mathf.RoundToInt(gameTime); // 1point per second
