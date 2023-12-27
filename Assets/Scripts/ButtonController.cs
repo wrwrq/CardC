@@ -9,7 +9,7 @@ public class ButtonController : MonoBehaviour
 {
 	public void StartButton()
 	{
-		SceneManager.LoadScene("MainScene");
+		SceneManager.LoadScene("Stage" + GetComponentInChildren<Text>().text);
 		PlayerPrefs.SetInt("stage", Int32.Parse(GetComponentInChildren<Text>().text));
 	}
 

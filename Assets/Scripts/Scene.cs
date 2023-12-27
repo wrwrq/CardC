@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Scene : MonoBehaviour
 {
-    void Start()
+    private void Awake()
     {
         int unlock = PlayerPrefs.GetInt("Unlock", 1);
         for (int i = 0; i < unlock; i++)
