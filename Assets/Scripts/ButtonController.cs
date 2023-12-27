@@ -28,6 +28,7 @@ public class ButtonController : MonoBehaviour
     public void NextButton()
 	{
 		string stage = "Stage" + GameManager.I.gameLevel;
+		PlayerPrefs.SetInt("stage", GameManager.I.gameLevel);
 		SceneManager.LoadScene(stage);
     }
 
