@@ -370,7 +370,7 @@ public class GameManager : MonoBehaviour
     {
         gameLevel++;
         Debug.Log(gameLevel);
-        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
+        gameLevel = Mathf.Clamp(gameLevel, 1, 3);
         PlayerPrefs.SetInt("Unlock", gameLevel);
     }
 
