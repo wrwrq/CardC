@@ -417,7 +417,8 @@ public class GameManager : MonoBehaviour
                 timeText.text = "0.00";
                 Debug.Log("Game Over!");
                 endPanel.SetActive(true); // game end, Score board call
-
+                audioSource.pitch = 1f;
+                audioSource.volume = 0.1f;
             }
 
             if (firstCard != null && secondCard == null && !isSingleCardSelect)
