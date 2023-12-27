@@ -30,9 +30,13 @@ public class GameManager : MonoBehaviour
     public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
-    //board Size
+    //게임 필수 정보
     public int boardSizeX;
     public int boardSizeY;
+    public float timeTheCardIsOpen;
+    public float setTime; //only one card flip, count down parameter
+    public float gameTime;
+    public int penaltyTime;
     int gameLevel;//   minLevel = 1   maxLevel = 3
 
     public int matchCount; //게임 클리어 조건,
@@ -40,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public bool inChecking;
     public bool fullCard;
-    public float timeTheCardIsOpen;
+    
 
     [Header("Card")]
     int[] prefebIdxs;
@@ -84,9 +88,8 @@ public class GameManager : MonoBehaviour
     private int failScore = 0;
     private int totalScore = 0;
 
-    public float gameTime;
-    public float setTime; //only one card flip, count down parameter
-    public int penaltyTime;
+    
+    
 
 
     void Awake()
@@ -202,6 +205,7 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
 
     //--------------------------------------------------------------------------------Board
 
@@ -338,6 +342,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     IEnumerator SingleCardTimeRunCo() //카드 하나만 골랐을때 타이머
     {
         isSingleCardSelect = true;
@@ -433,6 +438,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         gameState = GameState.Start;
+
+    }
+
+
+
+
+
+
+    //-----------------------------------------------------------------------------------게임 난이도
+
+    public class GameLevel
+    {
+        public int boardSizeX;
+        public int boardSizeY;
+
 
     }
 }
