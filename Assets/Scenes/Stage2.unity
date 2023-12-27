@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   SettingCanvas: {fileID: 0}
 --- !u!1 &16593802
 GameObject:
@@ -2041,6 +2042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   SettingCanvas: {fileID: 0}
 --- !u!1 &481270893
 GameObject:
@@ -9790,6 +9792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8d17e63cc43b04599f68369e58db59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 8911996479407513503, guid: b2ad64a7ae9a8cc4287e12e03bfe97b6, type: 3}
   SettingCanvas: {fileID: 0}
 --- !u!1001 &3503769571886699525
 PrefabInstance:
