@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         //PlayerPrefs 
         // stage -> 게임 랩
         // "Stage" + gameLevel -> 게임 점수
+        gameLevel = PlayerPrefs.GetInt("stage");
         gameStageName = "Stage" + gameLevel;
 
         audioSource.clip = bgm;
@@ -360,7 +361,7 @@ public class GameManager : MonoBehaviour
             Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
-        TotalScore();// totalscore
+        TotalScore();
         matchCardReset();
        
     }
