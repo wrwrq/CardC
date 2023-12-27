@@ -224,6 +224,7 @@ public class GameManager : MonoBehaviour
 
         if (firstName == secondName)
         {
+            matchCount++;
             audioSource.PlayOneShot(success);
             Debug.Log("Matched!");
             //카드 매칭시 카드 제거
@@ -255,10 +256,16 @@ public class GameManager : MonoBehaviour
             failScoreTxt.text = failScore.ToString();
         }
 
+        if(matchCount == boardSizeX * boardSizeY/2)
+        {
+            TotalScore();// totalscore
+            endPanel.SetActive(true);
+
+        }
         //모든 카드 맞췄을 경우 조건 추가
 
         matchCardReset();
-        TotalScore();// totalscore
+       
     }
     //--------------카드 매칭 실패
     void FailCard()
