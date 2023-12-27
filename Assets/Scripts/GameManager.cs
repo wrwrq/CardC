@@ -88,6 +88,8 @@ public class GameManager : MonoBehaviour
     public Text matchScoreTxt;
     public Text failScoreTxt;
     public Text totalScoreTxt;
+    public Text maxScoreTxt;
+    private int bestScore;
     private int timeScore = 0;
     private int matchScore = 0;
     private int failScore = 0;
@@ -380,7 +382,19 @@ public class GameManager : MonoBehaviour
         // timeScore, matchScore, failScore ++ total
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
+
+        int savedBestScore = PlayerPrefs.GetInt("BestScore", 0);
+
+
+        if (savedBestScore == 0 || totalScore > savedBestScore)
+        {
+            bestScore = totalScore;
+            maxScoreTxt.text = "최고 점수: " + bestScore.ToString() + "점";
+
+            PlayerPrefs.SetInt("BestScore", bestScore);
+        }
     }
+
 
 
     //--------------------------------------------------------------------------------card matching
