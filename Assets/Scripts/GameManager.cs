@@ -93,8 +93,6 @@ public class GameManager : MonoBehaviour
     private int failScore = 0;
     private int totalScore = 0;
 
-    
-    
 
 
     void Awake()
@@ -122,7 +120,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    //--------------------------------------------------------------------------------폐기 예정
     void EndGame()
     {
         tryText.gameObject.SetActive(true);
@@ -148,6 +146,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void FailCardInvoke()
+    {
+        Invoke("Failcard", 1f);
+    }
+
+    //--------------------------------------------------------------------------------폐기 예정정
 
     //--------------------------------------------------------------------------------Board
     public void GeneratorBoard() //보드 생성
@@ -175,14 +179,6 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(CreateNewCard());
 
-    }
-
-    void Clear()
-    {
-        gameLevel++;
-        Debug.Log(gameLevel);
-        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
-        PlayerPrefs.SetInt("Unlock", gameLevel);
     }
 
     void Shuffle() //카드 섞기
@@ -301,16 +297,20 @@ public class GameManager : MonoBehaviour
         matchCardReset();
        
     }
+
+    void Clear() //게임 클리어 
+    {
+        gameLevel++;
+        Debug.Log(gameLevel);
+        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
+        PlayerPrefs.SetInt("Unlock", gameLevel);
+    }
+
     //--------------카드 매칭 실패
     void FailCard()
     {
         failCard.SetActive(false);
     }
-
-    //void FailCardInvoke()
-    //{
-    //    Invoke("Failcard", 1f);
-    //}
 
     IEnumerator PenaltyUi()
     {
