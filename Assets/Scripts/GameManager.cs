@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     public Text PenaltyText;
 
     [Header("Game State")]
+    //게임 난이도
+    public GameLevel[] gameLevels;
+
     public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
     public Transform board;
@@ -128,10 +131,23 @@ public class GameManager : MonoBehaviour
     }
 
 
+    void SetGameState(GameLevel _gamelevel)
+    {
+        boardSizeX = _gamelevel.boardSizeX;
+        boardSizeY = _gamelevel.boardSizeY;
+        timeTheCardIsOpen = _gamelevel.timeTheCardIsOpen;
+        setTime = _gamelevel.setTime;
+        gameTime = _gamelevel.gameTime;
+        penaltyTime = _gamelevel.penaltyTime;
+    }
+
 
     //--------------------------------------------------------------------------------Board
     void GeneratorBoard() //보드 생성
     {
+        //게임 난이도 설정
+        SetGameState(gameLevels[gameLevel]);
+
         if (GameObject.Find("Board"))
         {
             DestroyImmediate(GameObject.Find("Board"));
@@ -447,12 +463,15 @@ public class GameManager : MonoBehaviour
 
 
     //-----------------------------------------------------------------------------------게임 난이도
-
+    [System.Serializable]
     public class GameLevel
     {
         public int boardSizeX;
         public int boardSizeY;
-
+        public float timeTheCardIsOpen;
+        public float setTime;
+        public float gameTime;
+        public int penaltyTime;
 
     }
 }

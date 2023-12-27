@@ -9717,7 +9717,7 @@ PrefabInstance:
       objectReference: {fileID: 1397649863}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: gameTime
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: nameCard
@@ -9757,6 +9757,34 @@ PrefabInstance:
       objectReference: {fileID: 778823151}
     - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
       propertyPath: timeTheCardIsOpen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].setTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].gameTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].boardSizeX
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].boardSizeY
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].penaltyTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4685856849466472305, guid: b03d71644454e477589ccd2e52924517, type: 3}
+      propertyPath: gameLevels.Array.data[0].timeTheCardIsOpen
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6662651472532732880, guid: b03d71644454e477589ccd2e52924517, type: 3}
