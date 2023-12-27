@@ -398,19 +398,6 @@ public class GameManager : MonoBehaviour
         // timeScore, matchScore, failScore ++ total
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
-
-        int saveMaxScore = PlayerPrefs.GetInt("MaxScore", 0);
-        if (saveMaxScore == 0 || totalScore > saveMaxScore)
-        {
-            maxScore = totalScore;
-            PlayerPrefs.SetInt("MaxScore", maxScore);
-
-
-            if (maxScoreTxt != null)
-            {
-                maxScoreTxt.text = maxScore.ToString() + "점";
-            }
-        }
     }
 
 
