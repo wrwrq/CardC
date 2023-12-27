@@ -566,7 +566,10 @@ public class GameManager : MonoBehaviour
 
     void OnDisable()
     {
-        endPanel.SetActive(true);
+        if (endPanel != null)
+        {
+            endPanel.SetActive(true);
+        }
         Time.timeScale = 0f;
     }
 }
