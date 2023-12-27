@@ -149,6 +149,18 @@ public class GameManager : MonoBehaviour
         Invoke("Failcard", 1f);
     }
 
+
+    //shortest record
+    void SetPlayerPrefs()
+    {
+        string currentStageName = "Stage" + gameLevel;
+        int localDataTimeScore = PlayerPrefs.GetInt(currentStageName);
+        if(localDataTimeScore < timeScore)
+        {
+         PlayerPrefs.SetFloat(currentStageName, timeScore);
+        }
+    }
+
     //--------------------------------------------------------------------------------폐기 예정정
 
     //--------------------------------------------------------------------------------Board
