@@ -399,6 +399,19 @@ public class GameManager : MonoBehaviour
         // timeScore, matchScore, failScore ++ total
         totalScore = timeScore + matchScore + failScore;
         totalScoreTxt.text = totalScore.ToString() + "점";
+
+        if (PlayerPrefs.HasKey("maxScore") == false)
+        {
+            PlayerPrefs.SetFloat("maxScore", totalScore);
+        }
+        else
+        {
+            if (PlayerPrefs.GetFloat("maxScore") < totalScore)
+            {
+                PlayerPrefs.SetFloat("maxScore", totalScore);
+            }
+        }
+        maxScoreTxt.text = PlayerPrefs.GetFloat("maxScore").ToString("N0");
     }
 
 
