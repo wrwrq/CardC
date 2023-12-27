@@ -193,17 +193,7 @@ public class GameManager : MonoBehaviour
     //}
 
 
-    //shortest record
-    void SetPlayerPrefs()
-    {
-        string currentStageName = "Stage" + gameLevel;
-        int localDataTotalScore = PlayerPrefs.GetInt(currentStageName);
-        if (localDataTotalScore < totalScore)
-        {
-            PlayerPrefs.SetInt(currentStageName, totalScore);
-            SetStagemaxScore();
-        }
-    }
+    
     void SetStagemaxScore()
     {
         string stagemaxScoreKey = "StagemaxScore" + gameLevel;
@@ -369,7 +359,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log("판넬 등장 후");
                 OnDisable();
             }
-            
+
+
             Clear();
         }
         //모든 카드 맞췄을 경우 조건 추가
@@ -382,7 +373,7 @@ public class GameManager : MonoBehaviour
     {
         gameLevel++;
         Debug.Log(gameLevel);
-        gameLevel = Mathf.Clamp(gameLevel, 0, 3);
+        gameLevel = Mathf.Clamp(gameLevel, 1, 3);
         PlayerPrefs.SetInt("Unlock", gameLevel);
     }
 
