@@ -328,7 +328,8 @@ public class GameManager : MonoBehaviour
         if(matchCount == boardSizeX * boardSizeY/2)
         {
             TotalScore();// totalscore
-            if (setEndpanel == true)
+            //마지막 NameCard 사라지고 EndPanel 보여주기
+            if(setEndpanel == true)
             {
                 yield return new WaitForSeconds(0.001f);
                 OnDisable();
