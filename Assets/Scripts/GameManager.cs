@@ -430,6 +430,7 @@ public class GameManager : MonoBehaviour
                 timeText.text = "0.00";
                 Debug.Log("Game Over!");
                 endPanel.SetActive(true); // game end, Score board call
+                TotalScore(); // 시간 다 떨어져도 점수를 계산
                 audioSource.pitch = 1f;
                 audioSource.volume = 0.1f;
             }
