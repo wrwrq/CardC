@@ -260,7 +260,7 @@ public class GameManager : MonoBehaviour
         matchCardReset();
         TotalScore();// totalscore
     }
-
+    //--------------카드 매칭 실패
     void FailCard()
     {
         failCard.SetActive(false);
@@ -271,12 +271,16 @@ public class GameManager : MonoBehaviour
         Invoke("Failcard", 1f);
     }
 
-    public void TotalScore()
+    IEnumerator PenaltyUi()
     {
-        // timeScore, matchScore, failScore ++ total
-        totalScore = timeScore + matchScore + failScore;
-        totalScoreTxt.text = totalScore.ToString() + "점";
+        Text temp = Instantiate(PenaltyText);
+        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.text = "-" + penaltyTime.ToString();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(temp.gameObject);
     }
+    //--------------카드 매칭 실패
+
 
     void matchCardReset() //초기화
     {
@@ -286,13 +290,11 @@ public class GameManager : MonoBehaviour
         fullCard = false;
     }
 
-    IEnumerator PenaltyUi()
+    public void TotalScore()
     {
-        Text temp = Instantiate(PenaltyText);
-        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
-        temp.text = "-" + penaltyTime.ToString();
-        yield return new WaitForSeconds(0.5f);
-        Destroy(temp.gameObject);
+        // timeScore, matchScore, failScore ++ total
+        totalScore = timeScore + matchScore + failScore;
+        totalScoreTxt.text = totalScore.ToString() + "점";
     }
 
 
