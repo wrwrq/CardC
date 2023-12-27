@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game State")]
     //게임 난이도
-    public GameLevel[] gameLevels;
+    public GameLevel gameLevelState;
 
     public GameState gameState;// 게임 상태(준비, 시작, 게임오버)
     bool isSingleCardSelect; //카드 하나만 선택했을때
@@ -153,16 +153,19 @@ public class GameManager : MonoBehaviour
     public void GeneratorBoard() //보드 생성
     {
         //게임 난이도 설정
-        SetGameState(gameLevels[gameLevel - 1]);
+        //SetGameState(gameLevels[gameLevel - 1]);
 
         if (GameObject.Find("Board"))
         {
+            countTime.SetActive(false);
+            endPanel.SetActive(false);
+            isSingleCardSelect = false;
             DestroyImmediate(GameObject.Find("Board"));
             cardPack.Clear();
             matchCardReset();
-            countTime.SetActive(false);
-            isSingleCardSelect = false;
+            matchCount = 0;
             timeText.color = originalColor;
+            gameTime = gameLevelState.gameTime;
         }
         board = new GameObject("Board").transform;
 
@@ -341,7 +344,7 @@ public class GameManager : MonoBehaviour
     void RunTime()//타이머
     {
         if (gameState == GameState.Start)
-        {
+        { 
             gameTime -= Time.deltaTime;
             timeText.text = gameTime.ToString("N2");
 

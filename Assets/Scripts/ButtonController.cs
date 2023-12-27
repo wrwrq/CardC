@@ -26,9 +26,8 @@ public class ButtonController : MonoBehaviour
 
     public void NextButton()
 	{
-		int newGameLevel = PlayerPrefs.GetInt("Unlock");
-		GameManager.I.gameLevel = newGameLevel;
-        GameManager.I.GeneratorBoard();
+		string stage = "Stage" + GameManager.I.gameLevel;
+		SceneManager.LoadScene(stage);
     }
 
 
