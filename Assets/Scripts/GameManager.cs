@@ -355,7 +355,7 @@ public class GameManager : MonoBehaviour
     IEnumerator PenaltyUi()
     {
         Text temp = Instantiate(PenaltyText);
-        temp.transform.SetParent(GameObject.Find("Time/TimeText").transform);
+        temp.transform.SetParent(GameObject.Find("Timer/TimeText").transform);
         temp.text = "-" + penaltyTime.ToString();
         yield return new WaitForSeconds(0.5f);
         Destroy(temp.gameObject);
